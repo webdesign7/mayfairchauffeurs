@@ -1,0 +1,8 @@
+<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32.000000" height="32.000000" fill="none">
+	<rect id="tdesign:secured" width="32.000000" height="32.000000" x="0.000000" y="0.000000" fill="rgb(255,255,255)" fill-opacity="0" />
+	<g id="Group">
+		<path id="Vector" d="M4 6.2L4 16C4 25.8 16 30 16 30C16 30 28 25.8 28 16L28 6.2L16 2L4 6.2Z" fill-rule="nonzero" />
+		<path id="Vector" d="M4 16C4 25.8 16 30 16 30C16 30 28 25.8 28 16L28 6.2L16 2L4 6.2L4 16Z" fill-rule="nonzero" stroke="rgb(150,0,1)" stroke-linecap="square" stroke-width="2" />
+		<path id="Vector" d="M10.8973 14.896L14.6667 18.6667L22.2093 11.124" fill-rule="nonzero" stroke="rgb(150,0,1)" stroke-linecap="square" stroke-width="2" />
+	</g>
+</svg>

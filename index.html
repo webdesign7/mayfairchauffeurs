@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link rel="stylesheet" href="./assets/styles/index.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./tailwind.config.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        .scroll-hidden {
+            opacity: 0;
+        }
+        
+        .fade-in-up {
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in-up.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .fade-in {
+            transition: opacity 0.8s ease-out;
+        }
+        
+        .fade-in.show {
+            opacity: 1;
+        }
+        
+        .fade-in-left {
+            transform: translateX(-40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in-left.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .fade-in-right {
+            transform: translateX(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in-right.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .scale-in {
+            transform: scale(0.9);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .scale-in.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .bg-position-38 {
+            background-position: 38% center;
+        }
+        
+        @media (min-width: 640px) {
+            .bg-position-38 {
+                background-position: center;
+            }
+        }
+        
+        @keyframes infinite-scroll-partners {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        .animate-infinite-scroll-partners {
+            animation: infinite-scroll-partners 12s linear infinite;
+        }
+        
+        @media (min-width: 760px) {
+            .animate-infinite-scroll-partners {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body x-data="{ menuOpen: false }" 
+      x-on:keydown.escape.window="menuOpen = false"
+      :class="{ 'overflow-hidden': menuOpen }">
+    
+    <div x-show="menuOpen"
+         x-transition:enter="transition-all ease-out duration-500"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition-all ease-in duration-500"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 bg-black z-50 flex items-center justify-center"
+         style="display: none;">
+        
+        <button @click="menuOpen = false" 
+                class="absolute top-10 right-10 w-12 h-12 flex items-center justify-center text-white hover:text-grey-500 transition-colors duration-200">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M25 7L7 25M7 7L25 25" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </button>
+
+        <nav class="flex flex-col items-center gap-y-8"
+             x-show="menuOpen"
+             x-transition:enter="transition-all ease-out duration-700 delay-200"
+             x-transition:enter-start="opacity-0 translate-y-8"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition-all ease-in duration-300"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0">
+            <a href="#" @click="menuOpen = false" class="text-[40px] font-light text-white hover:text-grey-500 transition-colors duration-300" style="font-family: 'Bodoni Moda', serif;">Home</a>
+            <a href="#" @click="menuOpen = false" class="text-[40px] font-light text-white hover:text-grey-500 transition-colors duration-300" style="font-family: 'Bodoni Moda', serif;">Services</a>
+            <a href="#" @click="menuOpen = false" class="text-[40px] font-light text-white hover:text-grey-500 transition-colors duration-300" style="font-family: 'Bodoni Moda', serif;">Projects</a>
+            <a href="#" @click="menuOpen = false" class="text-[40px] font-light text-white hover:text-grey-500 transition-colors duration-300" style="font-family: 'Bodoni Moda', serif;">About</a>
+            <a href="#" @click="menuOpen = false" class="text-[40px] font-light text-white hover:text-grey-500 transition-colors duration-300" style="font-family: 'Bodoni Moda', serif;">Contact</a>
+        </nav>
+    </div>
+
+    <div class="bg-mp-hero bg-no-repeat bg-position-38 md:bg-position-[unset] bg-cover h-[calc(100vh-30px)] md:h-auto flex flex-col">
+        <div class="max-w-[1240px] w-full mx-auto px-5 xl:px-0 flex flex-col h-full md:h-auto justify-between">
+            <header class="py-[30px] flex items-center justify-between">
+                <img class="max-w-logo hidden md:block" src="./assets/images/logo.png" alt="logo">
+                <img class="max-w-logo block md:hidden" src="./assets/images/logo_mobile.svg" alt="logo">
+                <div class="flex items-center gap-x-5 md:gap-x-10">
+                    <a href="#" class="text-white bg-red-800 hover:bg-red-900 duration-200 h-10 w-[120px] md:w-[160px] flex items-center justify-center rounded-[4px] text-md md:text-[18px] font-medium">
+                        Book
+                    </a>
+                    <div @click="menuOpen = true" class="flex items-center gap-x-3 hover:cursor-pointer">
+                        <img src="./assets/images/menuIcon.svg" alt="Menu Icon">
+                        <span class="text-white text-[18px] font-medium hidden md:block">Menu</span>
+                    </div>
+                </div>
+            </header>
+
+            <section class="flex flex-col my-auto md:my-[152px] items-center md:items-start md:text-left text-center">
+                <div class="text-grey-400 text-md md:text-[18px] mb-[10px]">Embark on an unforgettable journey with:</div>
+                <h1 class="md:text-[52px] text-[44px] font-bold text-white uppercase mb-10 tracking-[6%] max-w-[400px] leading-[1.2]">Mayfair Chauffeurs</h1>
+                <div class="flex items-center gap-x-3">
+                    <a href="#" class="text-white bg-red-800 border-[2px] border-red-800 hover:bg-red-900 hover:border-red-900 duration-200 h-10 w-[120px] sm:w-[160px] flex items-center justify-center rounded-[4px]  text-[18px] font-medium">
+                        Book
+                    </a>
+                    <a href="#" class="text-white bg-transparent border-[2px] border-red-800 hover:bg-red-900 hover:border-red-900 duration-200 h-10 w-[120px] sm:w-[160px] flex items-center justify-center rounded-[4px]  text-[18px] font-medium">
+                        Fleet
+                    </a>
+                </div>
+            </section>
+            <section class="flex items-center justify-between pb-[60px]">
+                <div class="flex items-center gap-x-5 sm:gap-x-10">
+                    <div class="flex flex-col items-start gap-y-[3px] md:gap-y-2">
+                        <div class="text-white text-md md:text-2xl leading-[29px] font-medium">100%</div>
+                        <div class="grey-400 text-[12px] md:text-lg text-grey-400 leading-[22px]">Satisfaction</div>
+                    </div>
+                    <div class="flex flex-col items-start gap-y-[3px] md:gap-y-2">
+                        <div class="text-white text-md md:text-2xl leading-[29px] font-medium">FREE</div>
+                        <div class="grey-400 text-[12px] md:text-lg text-grey-400 leading-[22px]">Waiting time</div>
+                    </div>
+                    <div class="flex flex-col items-start gap-y-[3px] md:gap-y-2">
+                        <div class="text-white text-md md:text-2xl leading-[29px] font-medium">24/7</div>
+                        <div class="grey-400 text-[12px] md:text-lg text-grey-400 leading-[22px]">Availability</div>
+                    </div>
+                </div>
+                <img class="max-w-[84px] md:max-w-[126px]" src="./assets/images/trustpilot.png" alt="Trustpilot image">
+            </section>
+
+           
+        </div>
+    </div>
+    <section class="my-[100px]">
+        <div x-intersect.half.once="$el.classList.add('show')" class="text-md sm:text-lg font-medium max-w-[677px] mx-auto px-6 md:px-0 text-center mb-[100px] fade-in-up scroll-hidden"><span class="text-red-800">Mayfair Chauffeurs</span> are a division of EG Chauffeurs, a multi-award-winning London-based chauffeur company providing professional chauffeur services and luxury chauffeur-driven car hire.</div>
+        <div class="max-w-[1360px] xl:px-0 md:px-6 mx-auto flex flex-col min-[1062px]:flex-row items-center min-[1062px]:items-start mb-[60px] sm:mb-[100px] gap-y-[50px] min-[1062px]:gap-y-0 min-[1062px]:gap-x-10">
+            <div class="flex items-center gap-x-4 md:flex-row flex-col min-[1062px]:gap-x-10 w-full gap-y-3 justify-center">
+                <img x-intersect.half.once="$el.classList.add('show')" class="max-w-[270px] max-[1062px]:rounded-[8px] xl:max-w-[354px] rounded-r-[8px] fade-in-left scroll-hidden md:block hidden" src="./assets/images/about1.png" alt="About 1">
+                <img x-intersect.half.once="$el.classList.add('show')" class="max-w-[270px] xl:max-w-[354px] rounded-[8px] fade-in-left scroll-hidden md:block hidden" src="./assets/images/about2.png" alt="About 2" style="transition-delay: 0.2s;">
+                <img x-intersect.half.once="$el.classList.add('show')" class=" w-full fade-in-left scroll-hidden md:hidden block" src="./assets/images/car1.png" alt="About 1">
+                <img x-intersect.half.once="$el.classList.add('show')" class=" w-full fade-in-left scroll-hidden md:hidden block" src="./assets/images/car2.png" alt="About 2" style="transition-delay: 0.2s;">
+            </div>
+            <div x-intersect.half.once="$el.classList.add('show')" class="flex flex-col md:max-w-[452px] md:px-0 px-6 w-full min-[1062px]:fade-in-right fade-in-up scroll-hidden" style="transition-delay: 0.4s;">
+                <div class="text-sm text-grey-600 mb-[10px] tracking-[3px]">About Us</div>
+                <div class="text-grey-600 max-w-[368px] mb-10 uppercase text-[28px] sm:text-4xl leading-[43px] font-medium">Not Just a Ride — <span class="text-grey-500">An Experience</span></div>
+                <div class="text-md leading-[170%]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+            </div>
+        </div>
+        <div class="container grid grid-cols-2 md:grid-cols-3 gap-x-5 sm:gap-x-8 gap-y-[29px] sm:gap-y-10 grid-rows-2 xl:px-0 px-6">
+            <div x-intersect.half.once="$el.classList.add('show')" class="flex sm:max-w-[unset] mx-auto max-w-[168px] flex-col w-full scale-in scroll-hidden" style="transition-delay: 0s;">
+                <img class="w-8 h-8" src="./assets/icons/availability.svg" alt="Availability">
+                <div class="h-[1px] my-4 w-full max-w-[291px] bg-gradient-grey"></div>
+                <div class="text-grey-600 uppercase mb-4 text-md sm:text-2xl leading-[29px] font-medium">24/7 Availability</div>
+                <div class="text-[14px] sm:text-md leading-[170%]">Round-the-clock service for your convenience</div>
+            </div>
+            <div x-intersect.half.once="$el.classList.add('show')" class="flex sm:max-w-[unset] mx-auto max-w-[168px] flex-col w-full scale-in scroll-hidden" style="transition-delay: 0.1s;">
+                <img class="w-8 h-8" src="./assets/icons/insured.svg" alt="Insured">
+                <div class="h-[1px] my-4 w-full max-w-[291px] bg-gradient-grey"></div>
+                <div class="text-grey-600 uppercase mb-4 text-md sm:text-2xl leading-[29px] font-medium">Fully Insured</div>
+                <div class="text-[14px] sm:text-md leading-[170%]">Complete peace of mind with comprehensive coverage</div>
+            </div>
+            <div x-intersect.half.once="$el.classList.add('show')" class="flex sm:max-w-[unset] mx-auto max-w-[168px] flex-col w-full scale-in scroll-hidden" style="transition-delay: 0.2s;">
+                <img class="w-8 h-8" src="./assets/icons/premium.svg" alt="Premium icon">
+                <div class="h-[1px] my-4 w-full max-w-[291px] bg-gradient-grey"></div>
+                <div class="text-grey-600 uppercase mb-4 text-md sm:text-2xl leading-[29px] font-medium">Premium Cars</div>
+                <div class="text-[14px] sm:text-md leading-[170%]">Luxury fleet maintained to the highest standards</div>
+            </div>
+            <div x-intersect.half.once="$el.classList.add('show')" class="flex sm:max-w-[unset] mx-auto max-w-[168px] flex-col w-full scale-in scroll-hidden" style="transition-delay: 0.3s;">
+                <img class="w-8 h-8" src="./assets/icons/drivers.svg" alt="Drivers icon">
+                <div class="h-[1px] my-4 w-full max-w-[291px] bg-gradient-grey"></div>
+                <div class="text-grey-600 uppercase mb-4 text-md sm:text-2xl leading-[29px] font-medium">Professional Drivers</div>
+                <div class="text-[14px] sm:text-md leading-[170%]">Experienced, vetted, and highly trained chauffeurs</div>
+            </div>
+            <div x-intersect.half.once="$el.classList.add('show')" class="flex sm:max-w-[unset] mx-auto max-w-[168px] flex-col w-full scale-in scroll-hidden" style="transition-delay: 0.4s;">
+                <img class="w-8 h-8" src="./assets/icons/booking.svg" alt="Booking icon">
+                <div class="h-[1px] my-4 w-full max-w-[291px] bg-gradient-grey"></div>
+                <div class="text-grey-600 uppercase mb-4 text-md sm:text-2xl leading-[29px] font-medium">Easy Booking</div>
+                <div class="text-[14px] sm:text-md leading-[170%]">Simple online reservation system</div>
+            </div>
+            <div x-intersect.half.once="$el.classList.add('show')" class="flex sm:max-w-[unset] mx-auto max-w-[168px] flex-col w-full scale-in scroll-hidden" style="transition-delay: 0.5s;">
+                <img class="w-8 h-8" src="./assets/icons/award.svg" alt="Award icon">
+                <div class="h-[1px] my-4 w-full max-w-[291px] bg-gradient-grey"></div>
+                <div class="text-grey-600 uppercase mb-4 text-md sm:text-2xl leading-[29px] font-medium">Award Winning</div>
+                <div class="text-[14px] sm:text-md leading-[170%]">Recognized for excellence in service</div>
+            </div>
+        </div>
+    </section>
+    <section class="mb-[100px]">
+        <div x-intersect.half.once="$el.classList.add('show')" class="text-grey-500 text-center text-[28px] md:text-4xl leading-[30px] md:leading-[43px] mb-10 uppercase max-w-[410px] mx-auto font-medium fade-in-up scroll-hidden"><span class="text-grey-600">Redefining</span> Chauffeur Service</div>
+        
+        <div x-data="{ open: false }" class="mb-0">
+            <div @click="open = !open" 
+                 class="max-w-[1360px] sm:h-[unser] h-[100px] items-center justify-center mx-auto relative flex flex-col bg-center bg-cover bg-no-repeat bg-accordion1-bg py-6 md:py-8 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-grey-600/80 cursor-pointer hover:before:bg-grey-600/70 before:transition-all before:duration-300">
+                <div class="container relative z-10 gap-x-4 md:gap-x-10 flex items-center px-4 md:px-0">
+                    <img src="./assets/icons/accordion-arrow.svg" alt="Accordion arrow" class="transition-transform duration-[400ms] linear w-4 h-4 md:w-auto md:h-auto shrink-0" :class="open ? 'rotate-90' : ''">
+                    <div class="text-[22px] md:text-3xl text-white font-medium uppercase"><span class="text-grey-200">01.</span> Airport Chauffeur Transfers</div>
+                </div>
+            </div>
+            <div x-show="open" 
+                 x-transition:enter="transition-all linear duration-[400ms]"
+                 x-transition:enter-start="opacity-0 max-h-0"
+                 x-transition:enter-end="opacity-100 max-h-[2000px]"
+                 x-transition:leave="transition-all linear duration-[400ms]"
+                 x-transition:leave-start="opacity-100 max-h-[2000px]"
+                 x-transition:leave-end="opacity-0 max-h-0"
+                 class="overflow-hidden">
+                <div class="flex flex-col md:flex-row my-10 md:my-10 items-start container gap-6 md:gap-[10px] ">
+                    <div class="flex flex-col w-full md:max-w-[493px] px-6 md:px-0">
+                        <div class="text-[14px] md:text-sm text-grey-600 mb-[10px] tracking-[3px]">Our Services</div>
+                        <div class="text-grey-500 uppercase text-[22px] md:text-4xl mb-10 leading-[30px] md:leading-[43px] font-medium">01. <span class="text-grey-600">Airport Chauffeur Transfers</span></div>
+                        <div class="text-md leading-[170%] mb-10">Professional airport transfer services ensuring timely arrivals and departures. Our experienced chauffeurs monitor flight schedules and provide meet-and-greet services at all major airports.</div>
+                        <a href="/read-more" class="bg-red-800 hover:bg-red-900 transition-colors duration-200 flex max-w-[212px] items-center justify-center w-full rounded-[4px] text-white px-6 md:px-10 py-3 text-[18px] font-medium gap-x-2">
+                            <span>Read more</span>
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="md:w-6 md:h-6" fill="none">
+                                <path d="M12.621 6.31055L6.3105 0L0 6.31055L1.06069 7.37119L5.56055 2.87128L5.56055 22.4642L7.06055 22.4642L7.06055 2.87142L11.5603 7.37119L12.621 6.31055Z" fill="rgb(255,255,255)" fill-rule="nonzero" transform="matrix(6.12323e-17,1,-1,0,23.25,5.68945)" />
+                            </svg>
+                        </a>
+                    </div>
+                    <img class="w-full md:max-w-[657px] sm:rounded-[8px] overflow-hidden " src="./assets/images/accordion/full-bg2.jpg" alt="Airport transfers">
+                </div>
+            </div>
+        </div>
+
+        <div x-data="{ open: false }" class="mb-0">
+            <div @click="open = !open" 
+                 class="max-w-[1360px] sm:h-[unser] h-[100px] items-center justify-center mx-auto relative flex flex-col bg-center bg-cover bg-no-repeat bg-accordion2-bg py-6 md:py-8 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-grey-600/80 cursor-pointer hover:before:bg-grey-600/70 before:transition-all before:duration-300">
+                <div class="container relative z-10 gap-x-4 md:gap-x-10 flex items-center px-4 md:px-0">
+                    <img src="./assets/icons/accordion-arrow.svg" alt="Accordion arrow" class="transition-transform duration-[400ms] linear w-4 h-4 md:w-auto md:h-auto shrink-0" :class="open ? 'rotate-90' : ''">
+                    <div class="text-[22px] md:text-3xl text-white font-medium uppercase"><span class="text-grey-200">02.</span> Corporate events</div>
+                </div>
+            </div>
+            <div x-show="open" 
+                 x-transition:enter="transition-all linear duration-[400ms]"
+                 x-transition:enter-start="opacity-0 max-h-0"
+                 x-transition:enter-end="opacity-100 max-h-[2000px]"
+                 x-transition:leave="transition-all linear duration-[400ms]"
+                 x-transition:leave-start="opacity-100 max-h-[2000px]"
+                 x-transition:leave-end="opacity-0 max-h-0"
+                 class="overflow-hidden">
+                <div class="flex  flex-col md:flex-row my-6 md:my-10 items-start container gap-6 md:gap-[10px] ">
+                    <div class="flex flex-col w-full md:max-w-[493px] px-6 md:px-0">
+                        <div class="text-[14px] md:text-sm text-grey-600 mb-[10px] tracking-[3px]">Our Services</div>
+                        <div class="text-grey-500 uppercase text-[22px] md:text-4xl mb-10 leading-[30px] md:leading-[43px] font-medium">02. <span class="text-grey-600">Corporate Events</span></div>
+                        <div class="text-md leading-[170%] mb-10">Tailored transportation solutions for corporate events, conferences, and business meetings. We ensure your executives and guests arrive in style and comfort.</div>
+                        <a href="/read-more" class="bg-red-800 hover:bg-red-900 transition-colors duration-200 flex max-w-[212px] items-center justify-center w-full rounded-[4px] text-white px-6 md:px-10 py-3 text-[18px] font-medium gap-x-2">
+                            <span>Read more</span>
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="md:w-6 md:h-6" fill="none">
+                                <path d="M12.621 6.31055L6.3105 0L0 6.31055L1.06069 7.37119L5.56055 2.87128L5.56055 22.4642L7.06055 22.4642L7.06055 2.87142L11.5603 7.37119L12.621 6.31055Z" fill="rgb(255,255,255)" fill-rule="nonzero" transform="matrix(6.12323e-17,1,-1,0,23.25,5.68945)" />
+                            </svg>
+                        </a>
+                    </div>
+                    <img class="w-full md:max-w-[657px] sm:rounded-[8px] overflow-hidden " src="./assets/images/accordion/full-bg1.jpg" alt="Corporate events">
+                </div>
+            </div>
+        </div>
+
+        <div x-data="{ open: true }" class="mb-0">
+            <div @click="open = !open" 
+                 class="max-w-[1360px] sm:h-[unser] h-[100px] items-center justify-center mx-auto relative flex flex-col bg-center bg-cover bg-no-repeat bg-accordion3-bg py-6 md:py-8 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-grey-600/80 cursor-pointer hover:before:bg-grey-600/70 before:transition-all before:duration-300">
+                <div class="container relative z-10 gap-x-4 md:gap-x-10 flex items-center px-4 md:px-0">
+                    <img src="./assets/icons/accordion-arrow.svg" alt="Accordion arrow" class="transition-transform duration-[400ms] linear w-4 h-4 md:w-auto md:h-auto shrink-0" :class="open ? 'rotate-90' : ''">
+                    <div class="text-[22px] md:text-3xl text-white font-medium uppercase"><span class="text-grey-200">03.</span> Business Travel</div>
+                </div>
+            </div>
+            <div x-show="open" 
+                 x-transition:enter="transition-all linear duration-[400ms]"
+                 x-transition:enter-start="opacity-0 max-h-0"
+                 x-transition:enter-end="opacity-100 max-h-[2000px]"
+                 x-transition:leave="transition-all linear duration-[400ms]"
+                 x-transition:leave-start="opacity-100 max-h-[2000px]"
+                 x-transition:leave-end="opacity-0 max-h-0"
+                 class="overflow-hidden">
+                <div class="flex flex-col md:flex-row my-10 md:my-10 items-start container gap-6 md:gap-[10px] ">
+                    <div class="flex flex-col w-full md:max-w-[493px] px-6 md:px-0">
+                        <div class="text-[14px] md:text-sm text-grey-600 mb-[10px] tracking-[3px]">Our Services</div>
+                        <div class="text-grey-500 uppercase text-[22px] md:text-4xl mb-10 leading-[30px] md:leading-[43px] font-medium">03. <span class="text-grey-600">Business Travel</span></div>
+                        <div class="text-md leading-[170%] mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                        <a href="/read-more" class="bg-red-800 hover:bg-red-900 transition-colors duration-200 flex max-w-[212px] items-center justify-center w-full rounded-[4px] text-white px-6 md:px-10 py-3 text-[18px] font-medium gap-x-2">
+                            <span>Read more</span>
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="md:w-6 md:h-6" fill="none">
+                                <path d="M12.621 6.31055L6.3105 0L0 6.31055L1.06069 7.37119L5.56055 2.87128L5.56055 22.4642L7.06055 22.4642L7.06055 2.87142L11.5603 7.37119L12.621 6.31055Z" fill="rgb(255,255,255)" fill-rule="nonzero" transform="matrix(6.12323e-17,1,-1,0,23.25,5.68945)" />
+                            </svg>
+                        </a>
+                    </div>
+                    <img class="w-full md:max-w-[657px] sm:rounded-[8px] overflow-hidden " src="./assets/images/accordion/full-bg3.png" alt="Business travel">
+                </div>
+            </div>
+        </div>
+    </section> 
+    <section class="mb-[100px]" x-data="{
+                    offset: 0,
+                    displayedOffset: 0,
+                    isAnimating: false,
+                    growingSides: false,
+                    direction: 0,
+                    contentVisible: true,
+                    touchStartX: 0,
+                    touchEndX: 0,
+                    touchStartY: 0,
+                    isSwiping: false,
+                    handleTouchStart(e) {
+                        this.touchStartX = e.touches[0].clientX;
+                        this.touchStartY = e.touches[0].clientY;
+                        this.isSwiping = false;
+                    },
+                    handleTouchMove(e) {
+                        if (!this.touchStartX) return;
+                        this.touchEndX = e.touches[0].clientX;
+                        const touchEndY = e.touches[0].clientY;
+                        const diffX = Math.abs(this.touchStartX - this.touchEndX);
+                        const diffY = Math.abs(this.touchStartY - touchEndY);
+                        
+                        if (diffX > diffY && diffX > 10) {
+                            this.isSwiping = true;
+                            e.preventDefault();
+                        }
+                    },
+                    handleTouchEnd() {
+                        if (!this.touchStartX || !this.touchEndX || !this.isSwiping) {
+                            this.touchStartX = 0;
+                            this.touchEndX = 0;
+                            this.isSwiping = false;
+                            return;
+                        }
+                        const diff = this.touchStartX - this.touchEndX;
+                        const minSwipeDistance = 50;
+                        if (Math.abs(diff) > minSwipeDistance) {
+                            if (diff > 0) {
+                                this.nextSlide();
+                            } else {
+                                this.prevSlide();
+                            }
+                        }
+                        this.touchStartX = 0;
+                        this.touchEndX = 0;
+                        this.isSwiping = false;
+                    },
+                    slides: [
+                        { 
+                            id: 0, 
+                            image: './assets/images/slider/slider1.png',
+                            mainImage: './assets/images/bmwi7.jpg',
+                            brand: 'BMW', 
+                            model: 'i7',
+                            description: 'Experience the pinnacle of electric luxury with cutting-edge technology and unparalleled comfort in every journey.',
+                            capacity: 'Up to 4 passengers',
+                            luggage: '3 large suitcases',
+                            features: 'WiFi, Climate Control, Premium Sound'
+                        },
+                        { 
+                            id: 1, 
+                            image: './assets/images/slider/slider2.png',
+                            mainImage: './assets/images/main-car.png',
+                            brand: 'MERCEDES-BENZ', 
+                            model: 'S-CLASS',
+                            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis.',
+                            capacity: 'Up to 3 passengers',
+                            luggage: '2 large suitcases',
+                            features: 'WiFi, Climate Control, Premium Sound'
+                        },
+                        { 
+                            id: 2, 
+                            image: './assets/images/slider/slider3.png',
+                            mainImage: './assets/images/rollsroyce.avif',
+                            brand: 'ROLLS-ROYCE', 
+                            model: 'PHANTOM VIII',
+                            description: 'The epitome of luxury and prestige, offering an unrivaled chauffeur experience with timeless elegance and supreme comfort.',
+                            capacity: 'Up to 4 passengers',
+                            luggage: '4 large suitcases',
+                            features: 'WiFi, Climate Control, Premium Sound'
+                        }
+                    ],
+                    getSlideAtPosition(position) {
+                        const total = this.slides.length;
+                        const index = ((position % total) + total) % total;
+                        return this.slides[index];
+                    },
+                    getPositionForSlide(slidePosition) {
+                        const isMobile = window.innerWidth < 768;
+                        const isSmallMobile = window.innerWidth < 450;
+                        const cardWidth = isSmallMobile ? 354 + 20 : (isMobile ? 320 : 363);
+                        return (slidePosition - this.offset) * cardWidth;
+                    },
+                    getScaleForSlide(slidePosition) {
+                        const relativePos = slidePosition - this.offset;
+                        const distance = Math.abs(relativePos);
+                        
+                        if (distance === 0) return 1;
+                        
+                        if (distance === 1) {
+                            if (this.growingSides) {
+                                if (this.direction === 1 && relativePos === 1) {
+                                    return 0.1;
+                                }
+                                if (this.direction === -1 && relativePos === -1) {
+                                    return 0.1;
+                                }
+                            }
+                            return 1;
+                        }
+                        
+                        return 0.1;
+                    },
+                    getOpacityForSlide(slidePosition) {
+                        const distance = Math.abs(slidePosition - this.offset);
+                        
+                        if (distance === 0) return 1;
+                        if (distance === 1) return 1;
+                        if (distance === 2) return 0.1;
+                        return 0;
+                    },
+                    getZIndexForSlide(slidePosition) {
+                        const distance = Math.abs(slidePosition - this.offset);
+                        const zIndexes = [20, 10, 5, 1, 0, 0];
+                        return zIndexes[Math.min(distance, zIndexes.length - 1)];
+                    },
+                    nextSlide() {
+                        if (this.isAnimating) return;
+                        this.isAnimating = true;
+                        this.growingSides = true;
+                        this.direction = 1;
+                        
+                        this.offset++;
+                        
+                        this.contentVisible = false;
+                        
+                        setTimeout(() => {
+                            this.displayedOffset++;
+                            setTimeout(() => {
+                                this.contentVisible = true;
+                            }, 50);
+                        }, 250);
+                        
+                        setTimeout(() => {
+                            this.growingSides = false;
+                            
+                            setTimeout(() => {
+                                this.isAnimating = false;
+                                this.direction = 0;
+                            }, 400);
+                        }, 200);
+                    },
+                    prevSlide() {
+                        if (this.isAnimating) return;
+                        this.isAnimating = true;
+                        this.growingSides = true;
+                        this.direction = -1;
+                        
+                        this.offset--;
+                        
+                        this.contentVisible = false;
+                        
+                        setTimeout(() => {
+                            this.displayedOffset--;
+                            setTimeout(() => {
+                                this.contentVisible = true;
+                            }, 50);
+                        }, 250);
+                        
+                        setTimeout(() => {
+                            this.growingSides = false;
+                            
+                            setTimeout(() => {
+                                this.isAnimating = false;
+                                this.direction = 0;
+                            }, 400);
+                        }, 200);
+                    },
+                    goToSlide(index) {
+                        if (this.isAnimating) return;
+                        this.isAnimating = true;
+                        this.growingSides = true;
+                        this.direction = index > this.offset ? 1 : -1;
+                        
+                        this.offset = index;
+                        
+                        this.contentVisible = false;
+                        
+                        setTimeout(() => {
+                            this.displayedOffset = index;
+                            setTimeout(() => {
+                                this.contentVisible = true;
+                            }, 50);
+                        }, 250);
+                        
+                        setTimeout(() => {
+                            this.growingSides = false;
+                            
+                            setTimeout(() => {
+                                this.isAnimating = false;
+                                this.direction = 0;
+                            }, 400);
+                        }, 200);
+                    },
+                    get currentSlideIndex() {
+                        return ((this.displayedOffset % this.slides.length) + this.slides.length) % this.slides.length;
+                    },
+                    get currentSlide() {
+                        return this.slides[this.currentSlideIndex];
+                    }
+                }">
+        <div class="container px-6 xl:px-0">
+            <div x-intersect.half.once="$el.classList.add('show')" class="text-center mb-10 uppercase max-w-[410px] mx-auto font-medium fade-in-up scroll-hidden">
+                <div class="text-sm md:text-base text-grey-600 mb-1">DISCOVER OUR</div>
+                <div class="text-2xl md:text-4xl text-grey-500">PRESTIGE VEHICLES</div>
+            </div>
+            <div class="flex flex-col">
+                <div class="flex flex-col lg:flex-row items-center md:mb-10 gap-6 lg:gap-0"
+                     @touchstart="handleTouchStart($event)"
+                     @touchmove="handleTouchMove($event)"
+                     @touchend="handleTouchEnd()">
+                    <img class="h-[300px] md:h-[400px] lg:h-[500px] object-cover transition-all duration-300 rounded-[12px] w-full lg:max-w-[698px] lg:w-auto" 
+                         :class="contentVisible ? 'opacity-100' : 'opacity-0'"
+                         :src="currentSlide.mainImage" 
+                         :alt="currentSlide.brand + ' ' + currentSlide.model">
+                    <div class="flex flex-col shrink-0 w-full lg:max-w-[542px] lg:grow-[2] lg:min-h-[368px] lg:-translate-x-[80px] rounded-[12px] bg-white/70 md:px-10 py-5 transition-all duration-300"
+                         :class="contentVisible ? 'opacity-100' : 'opacity-0'">
+                        <div class="text-grey-600 text-[22px] leading-[100%] md:text-[32px] mb-5 font-medium uppercase">
+                            <span x-text="currentSlide.brand"></span> <span class="text-grey-500" x-text="currentSlide.model"></span>
+                        </div>
+                        <div class="text-md md:text-md text-grey-600 leading-[170%] mb-5" x-text="currentSlide.description"></div>
+                        <ul class="p-0 md:p-[10px] text-grey-600 mb-5 text-md md:text-base">
+                            <li class="mb-3 leading-[100%]"><span class="font-medium">Capacity:</span> <span x-text="currentSlide.capacity"></span></li>
+                            <li class="mb-3 leading-[100%]"><span class="font-medium">Luggage:</span> <span x-text="currentSlide.luggage"></span></li>
+                            <li class=" leading-[100%]"><span class="font-medium">Features:</span> <span x-text="currentSlide.features"></span></li>
+                        </ul>
+                        <div class="flex flex-row items-stretch sm:items-center gap-3">
+                            <a href="" class="bg-red-800 hover:bg-red-900 transition-colors duration-200 text-white font-medium px-6 md:px-10 py-3 rounded-[4px] text-center text-[18px] md:text-base">Book This Car</a>
+                            <a href="" class="bg-transparent hover:bg-red-900 hover:border-red-900 hover:text-white transition-colors duration-200 text-grey-600 font-medium px-6 md:px-10 py-3 rounded-[4px] text-center text-[18px] md:text-base border border-grey-300">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative flex flex-col items-center overflow-hidden">
+                    
+                    <div class="relative flex items-center justify-center w-full pb-4 pt-10 sm:py-10"
+                         @touchstart="handleTouchStart($event)"
+                         @touchmove="handleTouchMove($event)"
+                         @touchend="handleTouchEnd()">
+                        <button @click="prevSlide()" class="absolute left-0 z-20 transition-all duration-200 hidden md:block">
+                           <img class="rotate-180" src="./assets/icons/slider-arrow.svg" alt="Slider arrow">
+                        </button>
+
+                        <div class="relative w-full max-w-[1400px] min-h-[230px] md:min-h-[300px] flex items-center justify-center overflow-x-hidden">
+                            <template x-for="i in Array.from({length: 21}, (_, i) => i - 10)" :key="'slide-' + i">
+                                <div class="absolute flex flex-col items-center"
+                                     :style="{
+                                         transform: `translateX(${getPositionForSlide(i)}px)`,
+                                         opacity: getOpacityForSlide(i),
+                                         zIndex: getZIndexForSlide(i),
+                                         pointerEvents: Math.abs(offset - i) > 1 ? 'none' : 'auto',
+                                         visibility: Math.abs(offset - i) > 1 ? 'hidden' : 'visible',
+                                         transition: 'transform 0.6s cubic-bezier(0.42, 0, 0.58, 1), opacity 0.6s ease-in-out',
+                                         willChange: 'transform, opacity',
+                                         cursor: Math.abs(offset - i) === 1 ? 'pointer' : 'default'
+                                     }"
+                                     @click="if (Math.abs(offset - i) === 1) { i < offset ? prevSlide() : nextSlide(); }">
+                                    <div class="flex flex-col px-4 py-3 min-[450px]:px-6 md:px-10 min-[450px]:py-6 md:py-8 rounded-[16px] bg-white w-[320px] h-[216px] min-[450px]:w-full min-[450px]:max-w-[280px] md:max-w-[363px] min-[450px]:h-auto overflow-hidden transition-opacity duration-200"
+                                         :class="Math.abs(offset - i) === 1 ? 'hover:opacity-80' : ''"
+                                         :style="Math.abs(offset - i) === 0 ? {
+                                             border: '1px solid rgba(185, 185, 185, 1)',
+                                             borderRadius: '12px',
+                                             background: 'rgba(244, 244, 244, 0.1)'
+                                         } : {}">
+                                        <img class="mb-2 min-[450px]:mb-4 md:mb-6 w-[268px] h-[122px] min-[450px]:w-full min-[450px]:max-w-[240px] md:max-w-[315px] min-[450px]:h-[100px] md:h-[144px] object-contain mx-auto shrink-0" 
+                                             :src="getSlideAtPosition(i).image" 
+                                             :alt="getSlideAtPosition(i).brand + ' ' + getSlideAtPosition(i).model"
+                                             :style="{
+                                                 transform: `scale(${getScaleForSlide(i)})`,
+                                                 transition: 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                                                 willChange: 'transform'
+                                             }">
+                                        <div class="text-grey-600 text-sm min-[450px]:text-lg md:text-2xl font-medium uppercase tracking-wider" 
+                                             x-text="getSlideAtPosition(i).brand"></div>
+                                        <div class="text-grey-500 text-sm min-[450px]:text-lg md:text-2xl uppercase tracking-wide" 
+                                             x-text="getSlideAtPosition(i).model"></div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+
+                        <button @click="nextSlide()" class="absolute right-0 z-20 transition-all duration-200 hidden md:block">
+                           <img src="./assets/icons/slider-arrow.svg" alt="Slider arrow">
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-3 mt-4">
+                        <template x-for="(slide, index) in slides" :key="'dot-' + slide.id">
+                            <button @click="goToSlide(index)" 
+                                    class="h-2 rounded-full transition-all duration-300"
+                                    :class="{
+                                        'bg-red-950 w-10': currentSlideIndex === index,
+                                        'bg-grey-400 w-2': currentSlideIndex !== index
+                                    }">
+                            </button>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="bg-grey-300 py-10 md:py-[60px] xl:px-0 px-6">
+        <div class="container">
+            <div x-intersect.half.once="$el.classList.add('show')" class="text-[28px] md:text-4xl text-grey-600 text-center mb-10 uppercase max-w-[700px] mx-auto font-medium fade-in-up scroll-hidden">WE value our <br class="block sm:hidden"> clients and want <span class="text-grey-500">them to have a nice experience</span></div>
+            <div class="flex mb-10 items-center justify-center gap-x-3">
+                <div class="text-xl md:text-2xl text-grey-600 font-medium">Excellent</div>
+                <img src="./assets/icons/trustpilot.svg" alt="Trustpilot">
+            </div>
+            <div class="text-grey-600 mb-10 text-center flex items-center justify-center gap-x-1.5 text-md">
+                <span>Rated <span class="font-medium">5.0</span>/ 5 on <span class="underline font-medium">525 reviews</span> on</span>
+                <img src="./assets/icons/trustpilot_logo_with_text.svg" alt="Trustpilot">
+            </div>
+        </div>
+    </section>
+    <section class="my-[100px] xl:px-0 px-6">
+        <div x-intersect.half.once="$el.classList.add('show')" class="text-red-800 text-[14px] tracking-[3px] text-center mb-[10px] fade-in-up scroll-hidden">Answers</div>
+        <div x-intersect.half.once="$el.classList.add('show')" class="text-[28px] sm:text-4xl font-medium uppercase text-center text-grey-600 mb-10 fade-in-up scroll-hidden" style="transition-delay: 0.1s;">Frequently asked questions</div>
+        <div class="max-w-[840px] mx-auto">
+            <div x-data="{ openItems: {} }" class="flex flex-col">
+                
+                <div class="border-b border-grey-400">
+                    <button @click="openItems[1] = !openItems[1]" 
+                            class="w-full py-5 flex items-center justify-between text-left hover:opacity-70 transition-opacity">
+                        <span class="text-md sm:text-[20px] font-medium" :class="openItems[1] ? 'text-red-800' : 'text-grey-600'">Do you rent to international visitors?</span>
+                        <svg class="w-6 h-6 transition-transform duration-300 shrink-0" 
+                             :class="openItems[1] ? 'rotate-45' : ''"
+                             viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div x-show="openItems[1]" 
+                         x-transition:enter="transition-all ease-in-out duration-500"
+                         x-transition:enter-start="max-h-0"
+                         x-transition:enter-end="max-h-[500px]"
+                         x-transition:leave="transition-all ease-in-out duration-500"
+                         x-transition:leave-start="max-h-[500px]"
+                         x-transition:leave-end="max-h-0"
+                         class="overflow-hidden">
+                        <div class="pb-6 text-sm sm:text-md leading-[170%] text-grey-600">
+                            Yes, we welcome international visitors. You'll need a valid driver's license from your country and an International Driving Permit if your license is not in English. Additionally, a valid passport and credit card in the driver's name are required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-b border-grey-400">
+                    <button @click="openItems[2] = !openItems[2]" 
+                            class="w-full py-5 flex items-center justify-between text-left hover:opacity-70 transition-opacity">
+                        <span class="text-md sm:text-[20px] font-medium" :class="openItems[2] ? 'text-red-800' : 'text-grey-600'">Do you have insurance?</span>
+                        <svg class="w-6 h-6 transition-transform duration-300 shrink-0" 
+                             :class="openItems[2] ? 'rotate-45' : ''"
+                             viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div x-show="openItems[2]" 
+                         x-transition:enter="transition-all ease-in-out duration-500"
+                         x-transition:enter-start="max-h-0"
+                         x-transition:enter-end="max-h-[500px]"
+                         x-transition:leave="transition-all ease-in-out duration-500"
+                         x-transition:leave-start="max-h-[500px]"
+                         x-transition:leave-end="max-h-0"
+                         class="overflow-hidden">
+                        <div class="pb-6 text-sm sm:text-md leading-[170%] text-grey-600">
+                            Yes, all our vehicles are fully insured with comprehensive coverage. This includes third-party liability, collision damage waiver, and theft protection. Additional coverage options are also available upon request.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-b border-grey-400">
+                    <button @click="openItems[3] = !openItems[3]" 
+                            class="w-full py-5 flex items-center justify-between text-left hover:opacity-70 transition-opacity">
+                        <span class="text-md sm:text-[20px] font-medium" :class="openItems[3] ? 'text-red-800' : 'text-grey-600'">If I rent a vehicle can I choose the chauffeur?</span>
+                        <svg class="w-6 h-6 transition-transform duration-300 shrink-0" 
+                             :class="openItems[3] ? 'rotate-45' : ''"
+                             viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div x-show="openItems[3]" 
+                         x-transition:enter="transition-all ease-in-out duration-500"
+                         x-transition:enter-start="max-h-0"
+                         x-transition:enter-end="max-h-[500px]"
+                         x-transition:leave="transition-all ease-in-out duration-500"
+                         x-transition:leave-start="max-h-[500px]"
+                         x-transition:leave-end="max-h-0"
+                         class="overflow-hidden">
+                        <div class="pb-6 text-sm sm:text-md leading-[170%] text-grey-600">
+                            While we assign chauffeurs based on availability and expertise, regular clients can request their preferred chauffeur if available. We'll do our best to accommodate your preferences whenever possible.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-b border-grey-400">
+                    <button @click="openItems[4] = !openItems[4]" 
+                            class="w-full py-5 flex items-center justify-between text-left hover:opacity-70 transition-opacity">
+                        <span class="text-md sm:text-[20px] font-medium" :class="openItems[4] ? 'text-red-800' : 'text-grey-600'">Do your drivers have certificates?</span>
+                        <svg class="w-6 h-6 transition-transform duration-300 shrink-0" 
+                             :class="openItems[4] ? 'rotate-45' : ''"
+                             viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div x-show="openItems[4]" 
+                         x-transition:enter="transition-all ease-in-out duration-500"
+                         x-transition:enter-start="max-h-0"
+                         x-transition:enter-end="max-h-[500px]"
+                         x-transition:leave="transition-all ease-in-out duration-500"
+                         x-transition:leave-start="max-h-[500px]"
+                         x-transition:leave-end="max-h-0"
+                         class="overflow-hidden">
+                        <div class="pb-6 text-sm sm:text-md leading-[170%] text-grey-600">
+                            Absolutely. All our chauffeurs are fully licensed, professionally trained, and hold relevant certifications. They undergo regular background checks, defensive driving courses, and customer service training to ensure the highest standards.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-b border-grey-400">
+                    <button @click="openItems[5] = !openItems[5]" 
+                            class="w-full py-5 flex items-center justify-between text-left hover:opacity-70 transition-opacity">
+                        <span class="text-md sm:text-[20px] font-medium" :class="openItems[5] ? 'text-red-800' : 'text-grey-600'">How old do you have to be to rent a car?</span>
+                        <svg class="w-6 h-6 transition-transform duration-300 shrink-0" 
+                             :class="openItems[5] ? 'rotate-45' : ''"
+                             viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div x-show="openItems[5]" 
+                         x-transition:enter="transition-all ease-in-out duration-500"
+                         x-transition:enter-start="max-h-0"
+                         x-transition:enter-end="max-h-[500px]"
+                         x-transition:leave="transition-all ease-in-out duration-500"
+                         x-transition:leave-start="max-h-[500px]"
+                         x-transition:leave-end="max-h-0"
+                         class="overflow-hidden">
+                        <div class="pb-6 text-sm sm:text-md leading-[170%] text-grey-600">
+                            The minimum age requirement is 25 years old with at least 2 years of driving experience. For premium and luxury vehicles, drivers must be 30 years or older. A valid driver's license held for the required period is mandatory.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="relative h-[220px] md:h-[402px] overflow-hidden"
+             x-data="{ 
+                 parallaxOffset: 0,
+                 updateParallax() {
+                     const section = $el;
+                     const rect = section.getBoundingClientRect();
+                     const windowHeight = window.innerHeight;
+                     const sectionMiddle = rect.top + rect.height / 2;
+                     const windowMiddle = windowHeight / 2;
+                     const distance = windowMiddle - sectionMiddle;
+                     const isMobile = window.innerWidth < 768;
+                     const parallaxSpeed = isMobile ? 0.4 : 0.3;
+                     this.parallaxOffset = distance * parallaxSpeed;
+                 }
+             }"
+             x-init="updateParallax(); window.addEventListener('scroll', () => updateParallax()); window.addEventListener('resize', () => updateParallax())"
+             @scroll.window="updateParallax()">
+        <img src="./assets/images/parallax-image.jpg" 
+             alt="Parallax image"
+             class="absolute w-full h-auto min-h-[200%] md:min-h-[150%] object-cover top-1/2 left-0 -translate-y-1/2"
+             :style="`transform: translateY(calc(-52% + ${parallaxOffset}px))`">
+    </section>
+
+    <section class="my-[100px]">
+        <div class="container xl:px-0 px-6">
+            <div x-intersect.half.once="$el.classList.add('show')" class="text-[28px] sm:text-4xl text-grey-600 font-medium uppercase mb-[10px] fade-in-up scroll-hidden">SEO Content Section</div>
+            <div x-intersect.half.once="$el.classList.add('show')" class="text-[22px] sm:text-2xl mb-10 text-grey-600 fade-in-up scroll-hidden" style="transition-delay: 0.1s;">Some subtitle</div>
+            <div x-intersect.half.once="$el.classList.add('show')" class="text-md leading-[170%] mb-3 fade-in-up scroll-hidden" style="transition-delay: 0.2s;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+            <div x-intersect.half.once="$el.classList.add('show')" class="text-md leading-[170%] mb-10 fade-in-up scroll-hidden" style="transition-delay: 0.3s;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+            <div x-intersect.half.once="$el.classList.add('show')" class="text-[22px] sm:text-2xl mb-10 text-grey-600 fade-in-up scroll-hidden" style="transition-delay: 0.4s;">Some subtitle</div>
+            <div x-intersect.half.once="$el.classList.add('show')" class="text-md leading-[170%] mb-3 fade-in-up scroll-hidden" style="transition-delay: 0.5s;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+            <div x-intersect.half.once="$el.classList.add('show')" class="text-md leading-[170%] fade-in-up scroll-hidden" style="transition-delay: 0.6s;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+
+
+        </div>
+    </section>
+
+    <section>
+        <div class="container xl:px-0 px-6">
+            <div x-intersect.half.once="$el.classList.add('show')" class="text-[28px] sm:text-4xl font-medium uppercase text-center text-grey-600 mb-10 fade-in-up scroll-hidden">Latest News</div>
+            <div class="grid grid-cols-1 gap-y-6 lg:grid-cols-3 md:gap-x-2 lg:gap-x-6">
+                <div x-intersect.half.once="$el.classList.add('show')" class="group flex max-w-[600px] mx-auto lg:mx-0 lg:max-w-none flex-col border border-grey-100 rounded-[12px] fade-in-up scroll-hidden overflow-hidden transition-all duration-500 ease-in-out hover:bg-[#ececec] hover:cursor-pointer" style="transition-delay: 0s;">
+                    <img class="w-full h-[220px] sm:h-[283px] object-cover rounded-t-[12px] transition-transform duration-500 ease-in-out group-hover:scale-105" src="./assets/images/news/img-1.png" alt="News 1">
+                    <div class="flex flex-col p-6">
+                        <div class="text-[18px] sm:text-xl text-grey-600 font-medium mb-4 uppercase">The Goring Hotel Chauffeur Service London</div>
+                        <div class="text-[14px] sm:text-md mb-9">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</div>
+                        <a href="" class="text-red-800 flex gap-x-[10px] w-fit hover:border-red-800 border-b border-transparent duration-200 items-center text-[18px] font-medium">
+                            <span>Read more</span>
+                            <svg width="23" height="13" viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.1536 12.621L22.4642 6.3105L16.1536 0L15.093 1.06069L19.5929 5.56055H0V7.06055H19.5928L15.093 11.5603L16.1536 12.621Z" fill="currentColor"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div x-intersect.half.once="$el.classList.add('show')" class="group flex max-w-[600px] mx-auto lg:mx-0 lg:max-w-none flex-col border border-grey-100 rounded-[12px] fade-in-up scroll-hidden overflow-hidden transition-all duration-500 ease-in-out hover:bg-[#ececec] hover:cursor-pointer" style="transition-delay: 0.15s;">
+                    <img class="w-full h-[220px] sm:h-[283px] object-cover rounded-t-[12px] transition-transform duration-500 ease-in-out group-hover:scale-105" src="./assets/images/news/img-2.png" alt="News 1">
+                    <div class="flex flex-col p-6">
+                        <div class="text-[18px] sm:text-xl text-grey-600 font-medium mb-4 uppercase">The Goring Hotel Chauffeur Service London</div>
+                        <div class="text-[14px] sm:text-md mb-9">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</div>
+                        <a href="" class="text-red-800 flex gap-x-[10px] w-fit hover:border-red-800 border-b border-transparent duration-200 items-center text-[18px] font-medium">
+                            <span>Read more</span>
+                            <svg width="23" height="13" viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.1536 12.621L22.4642 6.3105L16.1536 0L15.093 1.06069L19.5929 5.56055H0V7.06055H19.5928L15.093 11.5603L16.1536 12.621Z" fill="currentColor"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div x-intersect.half.once="$el.classList.add('show')" class="group flex max-w-[600px] mx-auto lg:mx-0 lg:max-w-none flex-col border border-grey-100 rounded-[12px] fade-in-up scroll-hidden overflow-hidden transition-all duration-500 ease-in-out hover:bg-[#ececec] hover:cursor-pointer" style="transition-delay: 0.3s;">
+                    <img class="w-full h-[220px] sm:h-[283px] object-cover rounded-t-[12px] transition-transform duration-500 ease-in-out group-hover:scale-105" src="./assets/images/news/img-3.png" alt="News 1">
+                    <div class="flex flex-col p-6">
+                        <div class="text-[18px] sm:text-xl text-grey-600 font-medium mb-4 uppercase">The Goring Hotel Chauffeur Service London</div>
+                        <div class="text-[14px] sm:text-md mb-9">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</div>
+                        <a href="" class="text-red-800 flex gap-x-[10px] w-fit hover:border-red-800 border-b border-transparent duration-200 items-center text-[18px] font-medium">
+                            <span>Read more</span>
+                            <svg width="23" height="13" viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.1536 12.621L22.4642 6.3105L16.1536 0L15.093 1.06069L19.5929 5.56055H0V7.06055H19.5928L15.093 11.5603L16.1536 12.621Z" fill="currentColor"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="my-[100px]">
+        <div class="container xl:px-0 sm:px-6">
+            <div x-intersect.half.once="$el.classList.add('show')" class="text-[28px] sm:text-4xl font-medium uppercase text-center text-grey-600 mb-10 fade-in-up scroll-hidden">Our partners</div>
+            
+            <div class="hidden sm:grid grid-cols-3 gap-x-[70px] gap-y-12 lg:gap-x-[180px] lg:grid-cols-4">
+                <img class="mx-auto" src="./assets/images/partners/logo.svg" alt="Partner 1">
+                <img class="mx-auto" src="./assets/images/partners/logo-1.svg" alt="Partner 2">
+                <img class="mx-auto" src="./assets/images/partners/logo-2.svg" alt="Partner 3">
+                <img class="mx-auto" src="./assets/images/partners/logo-3.svg" alt="Partner 4">
+                <img class="mx-auto" src="./assets/images/partners/logo-4.svg" alt="Partner 5">
+                <img class="mx-auto" src="./assets/images/partners/logo-5.svg" alt="Partner 6">
+                <img class="mx-auto" src="./assets/images/partners/logo-6.svg" alt="Partner 7">
+                <img class="mx-auto" src="./assets/images/partners/logo.svg" alt="Partner 1">
+
+            </div>
+
+            <div class="sm:hidden overflow-hidden">
+                <div class="flex items-center animate-infinite-scroll-partners">
+                    <div class="flex items-center shrink-0 gap-[43px]">
+                        <img class="w-[107px] h-[54px] object-contain shrink-0" src="./assets/images/partners/logo.svg" alt="Partner 1">
+                        <img class="w-[107px] h-[54px] object-contain shrink-0" src="./assets/images/partners/logo-1.svg" alt="Partner 2">
+                        <img class="w-[107px] h-[54px] object-contain shrink-0" src="./assets/images/partners/logo-2.svg" alt="Partner 3">
+                        <img class="w-[107px] h-[54px] object-contain shrink-0" src="./assets/images/partners/logo-3.svg" alt="Partner 4">
+                        <img class="w-[107px] h-[54px] object-contain shrink-0" src="./assets/images/partners/logo-4.svg" alt="Partner 5">
+                        <img class="w-[107px] h-[54px] object-contain shrink-0" src="./assets/images/partners/logo-5.svg" alt="Partner 6">
+                        <img class="w-[107px] h-[54px] object-contain shrink-0" src="./assets/images/partners/logo-6.svg" alt="Partner 7">
+                    </div>
+                    <div class="flex items-center shrink-0 gap-[43px]">
+                        <img class="w-[107px] h-[54px] object-contain shrink-0" src="./assets/images/partners/logo.svg" alt="Partner 1">
+                        <img class="w-[107px] h-[54px] object-contain shrink-0" src="./assets/images/partners/logo-1.svg" alt="Partner 2">
+                        <img class="w-[107px] h-[54px] object-contain shrink-0" src="./assets/images/partners/logo-2.svg" alt="Partner 3">
+                        <img class="w-[107px] h-[54px] object-contain shrink-0" src="./assets/images/partners/logo-3.svg" alt="Partner 4">
+                        <img class="w-[107px] h-[54px] object-contain shrink-0" src="./assets/images/partners/logo-4.svg" alt="Partner 5">
+                        <img class="w-[107px] h-[54px] object-contain shrink-0" src="./assets/images/partners/logo-5.svg" alt="Partner 6">
+                        <img class="w-[107px] h-[54px] object-contain shrink-0" src="./assets/images/partners/logo-6.svg" alt="Partner 7">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="bg-[#030303] pt-[60px] pb-5 md:pb-10 w-screen overflow-x-hidden">
+        <div class="max-w-[1240px] mx-auto flex flex-col text-white px-6 xl:px-0">
+            <div class="max-w-[891px] mb-12 w-full mx-auto flex flex-col lg:flex-row items-center gap-y-6 lg:gap-y-0 lg:gap-x-8">
+                <div class="text-xl md:text-[22px] font-medium shrink-0">Stay updated:</div>
+                <div class="flex items-center gap-x-4 lg:gap-x-8 justify-center lg:justify-start flex-1 w-full lg:max-w-none">
+                    <input class="border bg-transparent p-3 rounded-[4px] border-grey-100 outline-none text-[12px] md:text-sm grow max-w-[462px] w-full placeholder:text-white" placeholder="Enter email to receive updates and newsletters..." type="text">
+                    <button class="bg-grey-250 max-w-[90px] md:max-w-[210px] w-full h-[46px] flex items-center text-[12px] justify-center rounded-[4px] md:text-[18px] font-medium shrink-0">Subscribe</button>
+                </div>
+            </div>
+            <div class="border-t border-b border-white py-12 relative">
+                <div class="absolute -z-1 right-0 md:-right-10 top-[50%] -left-20 w-[120%] md:w-full md:left-[unset] md:top-5 translate-y-[-50%] md:translate-y-0 max-w-[715px] opacity-15 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-footer-bg-gradient before:z-10">
+                    <img class="w-full" src="./assets/images/footer_bg.png" alt="Footer background">
+                </div>
+                <div class="relative z-5 grid gap-x-[43px] md:grid-cols-2 xl:grid-cols-[460px_193px_188px_188px] xl:gap-x-[43px]">
+                    <div class="flex flex-col mb-10 md:mb-0">
+                        <img class="max-w-[279px] mb-6" src="./assets/images/logo.png" alt="Logo">
+                        <div class="text-md max-w-[400px] mb-6">Mayfair Chauffeurs are a multi-award-winning chauffeur company providing professional chauffeur services.</div>
+                        <div class="text-grey-500 flex flex-col gap-y-2 mb-6">
+                            <a href="tel:+442071172905" class="flex items-center gap-x-2 hover:text-grey-100 duration-200">
+                                <img src="./assets/icons/plus.svg" alt="Plus">
+                                <span>+44 (0) 207 117 2905</span>
+                            </a>
+                            <a href="mailto:info@egchauffeurs.com" class="flex items-center gap-x-2 hover:text-grey-100 duration-200">
+                                <img src="./assets/icons/plus.svg" alt="Plus">
+                                <span>info@egchauffeurs.com</span>
+                            </a>
+                            <div class="flex items-center gap-x-2">
+                                <img src="./assets/icons/plus.svg" alt="Plus">
+                                <span>Operator Licence No: 00863101</span>
+                            </div>
+                            <div class="flex items-center gap-x-2">
+                                <img src="./assets/icons/plus.svg" alt="Plus">
+                                <span>Vat No: 191600718</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-x-3 mb-10 md:mb-0">
+                            <img class="max-w-[128px]" src="./assets/icons/trustpilot.svg" alt="">
+                            <img src="./assets/icons/trustpilot_logo_white.svg" alt="Trustpilot">
+                        </div>
+                    </div>
+                    <div class="flex flex-col mb-10 md:mb-0">
+                        <div class="text-[18px] mb-6 font-medium">Links</div>
+                        <div class="flex flex-col gap-y-3">
+                            <a href="#" class="hover:text-grey-100 duration-200">About Us</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Services</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Fleet</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Contact Us</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Terms and Conditions</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Privacy Policy</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col mb-10 md:mb-0">
+                        <div class="text-[18px] mb-6 font-medium">Cars</div>
+                        <div class="flex flex-col gap-y-3">
+                            <a href="#" class="hover:text-grey-100 duration-200">Mercedes S Class</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Mercedes V Class</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">BMW I7 Series</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Range Rover Vogue</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Rolls Royce Phantom</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="text-[18px] mb-6 font-medium">Services</div>
+                        <div class="flex flex-col gap-y-3">
+                            <a href="#" class="hover:text-grey-100 duration-200">Airport Transfers</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Corporate Events</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Rolls Royce Phantom</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center justify-between w-full pt-12 md:flex-row flex-col">
+                <div class="text-[18px] text-grey-100 md:order-1 order-2 md:mt-0 mt-8">Copyright 2025</div>
+                <div class="flex items-center gap-x-8 md:order-2 order-1">
+                    <a href="#"><img class="max-w-5 max-h-5" src="./assets/icons/socials/linkedin.svg" alt="Linkedin"></a>
+                    <a href="#"><img class="max-w-5 max-h-5" src="./assets/icons/socials/instagram.svg" alt="Instagram"></a>
+                    <a href="#"><img class="max-w-5 max-h-5" src="./assets/icons/socials/dribble.svg" alt="Dribble"></a>
+                    <a href="#"><img class="max-w-5 max-h-5" src="./assets/icons/socials/facebook.svg" alt="Facebook"></a>
+                    <a href="#"><img class="max-w-5 max-h-5" src="./assets/icons/socials/x.svg" alt="X"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
