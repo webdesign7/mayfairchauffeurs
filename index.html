@@ -122,19 +122,19 @@
              x-transition:leave="transition-all ease-in duration-300"
              x-transition:leave-start="opacity-100"
              x-transition:leave-end="opacity-0">
-            <a href="#" @click="menuOpen = false" class="text-[40px] font-light text-white hover:text-grey-500 transition-colors duration-300" style="font-family: 'Bodoni Moda', serif;">Home</a>
-            <a href="#" @click="menuOpen = false" class="text-[40px] font-light text-white hover:text-grey-500 transition-colors duration-300" style="font-family: 'Bodoni Moda', serif;">Services</a>
-            <a href="#" @click="menuOpen = false" class="text-[40px] font-light text-white hover:text-grey-500 transition-colors duration-300" style="font-family: 'Bodoni Moda', serif;">Projects</a>
-            <a href="#" @click="menuOpen = false" class="text-[40px] font-light text-white hover:text-grey-500 transition-colors duration-300" style="font-family: 'Bodoni Moda', serif;">About</a>
-            <a href="#" @click="menuOpen = false" class="text-[40px] font-light text-white hover:text-grey-500 transition-colors duration-300" style="font-family: 'Bodoni Moda', serif;">Contact</a>
+            <a href="#" @click="menuOpen = false" class="text-[40px] font-light text-white hover:text-grey-500 transition-colors duration-300"  >Home</a>
+            <a href="#" @click="menuOpen = false" class="text-[40px] font-light text-white hover:text-grey-500 transition-colors duration-300"  >Services</a>
+            <a href="#" @click="menuOpen = false" class="text-[40px] font-light text-white hover:text-grey-500 transition-colors duration-300"  >Projects</a>
+            <a href="#" @click="menuOpen = false" class="text-[40px] font-light text-white hover:text-grey-500 transition-colors duration-300"  >About</a>
+            <a href="#" @click="menuOpen = false" class="text-[40px] font-light text-white hover:text-grey-500 transition-colors duration-300"  >Contact</a>
         </nav>
     </div>
 
     <div class="bg-mp-hero bg-no-repeat bg-position-38 md:bg-position-[unset] bg-cover h-[calc(100vh-30px)] md:h-auto flex flex-col">
         <div class="max-w-[1240px] w-full mx-auto px-5 xl:px-0 flex flex-col h-full md:h-auto justify-between">
             <header class="py-[30px] flex items-center justify-between">
-                <img class="max-w-logo hidden md:block" src="./assets/images/logo.png" alt="logo">
-                <img class="max-w-logo block md:hidden" src="./assets/images/logo_mobile.svg" alt="logo">
+                <a href="/" class="max-w-logo hidden md:block" ><img src="./assets/images/logo.png" alt="logo"></a>
+                <a href="/" class="max-w-logo block md:hidden" ><img src="./assets/images/logo_mobile.svg" alt="logo"></a>
                 <div class="flex items-center gap-x-5 md:gap-x-10">
                     <a href="#" class="text-white bg-red-800 hover:bg-red-900 duration-200 h-10 w-[120px] md:w-[160px] flex items-center justify-center rounded-[4px] text-md md:text-[18px] font-medium">
                         Book
@@ -153,7 +153,7 @@
                     <a href="#" class="text-white bg-red-800 border-[2px] border-red-800 hover:bg-red-900 hover:border-red-900 duration-200 h-10 w-[120px] sm:w-[160px] flex items-center justify-center rounded-[4px]  text-[18px] font-medium">
                         Book
                     </a>
-                    <a href="#" class="text-white bg-transparent border-[2px] border-red-800 hover:bg-red-900 hover:border-red-900 duration-200 h-10 w-[120px] sm:w-[160px] flex items-center justify-center rounded-[4px]  text-[18px] font-medium">
+                    <a href="/fleet.html" class="text-white bg-transparent border-[2px] border-red-800 hover:bg-red-900 hover:border-red-900 duration-200 h-10 w-[120px] sm:w-[160px] flex items-center justify-center rounded-[4px]  text-[18px] font-medium">
                         Fleet
                     </a>
                 </div>
@@ -426,7 +426,7 @@
                     getPositionForSlide(slidePosition) {
                         const isMobile = window.innerWidth < 768;
                         const isSmallMobile = window.innerWidth < 450;
-                        const cardWidth = isSmallMobile ? 354 + 20 : (isMobile ? 320 : 363);
+                        const cardWidth = isSmallMobile ? 354 + 20 : (isMobile ? 320 : 290);
                         return (slidePosition - this.offset) * cardWidth;
                     },
                     getScaleForSlide(slidePosition) {
@@ -553,15 +553,15 @@
                 <div class="text-2xl md:text-4xl text-grey-500">PRESTIGE VEHICLES</div>
             </div>
             <div class="flex flex-col">
-                <div class="flex flex-col lg:flex-row items-center md:mb-10 gap-6 lg:gap-0"
+                <div class="flex flex-col lg:flex-row items-center md:mb-6 gap-6 lg:gap-0"
                      @touchstart="handleTouchStart($event)"
                      @touchmove="handleTouchMove($event)"
                      @touchend="handleTouchEnd()">
-                    <img class="h-[300px] md:h-[400px] lg:h-[500px] object-cover transition-all duration-300 rounded-[12px] w-full lg:max-w-[698px] lg:w-auto" 
-                         :class="contentVisible ? 'opacity-100' : 'opacity-0'"
+                    <img class="h-[300px] md:h-[350px] lg:h-[440px] object-cover transition-all duration-300 rounded-[12px] w-full lg:w-[698px]" 
+                     :class="contentVisible ? 'opacity-100' : 'opacity-0'"
                          :src="currentSlide.mainImage" 
                          :alt="currentSlide.brand + ' ' + currentSlide.model">
-                    <div class="flex flex-col shrink-0 w-full lg:max-w-[542px] lg:grow-[2] lg:min-h-[368px] lg:-translate-x-[80px] rounded-[12px] bg-white/70 md:px-10 py-5 transition-all duration-300"
+                    <div class="flex flex-col shrink-0 w-full lg:max-w-[542px] lg:grow-[2] lg:min-h-[300px] lg:-translate-x-[80px] rounded-[12px] bg-white/70 md:px-10 py-5 transition-all duration-300"
                          :class="contentVisible ? 'opacity-100' : 'opacity-0'">
                         <div class="text-grey-600 text-[22px] leading-[100%] md:text-[32px] mb-5 font-medium uppercase">
                             <span x-text="currentSlide.brand"></span> <span class="text-grey-500" x-text="currentSlide.model"></span>
@@ -581,7 +581,7 @@
 
                 <div class="relative flex flex-col items-center overflow-hidden">
                     
-                    <div class="relative flex items-center justify-center w-full pb-4 pt-10 sm:py-10"
+                    <div class="relative max-w-[950px] flex items-center justify-center w-full pb-4 pt-6 sm:py-0"
                          @touchstart="handleTouchStart($event)"
                          @touchmove="handleTouchMove($event)"
                          @touchend="handleTouchEnd()">
@@ -589,7 +589,7 @@
                            <img class="rotate-180" src="./assets/icons/slider-arrow.svg" alt="Slider arrow">
                         </button>
 
-                        <div class="relative w-full max-w-[1400px] min-h-[230px] md:min-h-[300px] flex items-center justify-center overflow-x-hidden">
+                        <div class="relative w-full max-w-[1400px] min-h-[225px] md:min-h-[225px] flex items-center justify-center overflow-x-hidden">
                             <template x-for="i in Array.from({length: 21}, (_, i) => i - 10)" :key="'slide-' + i">
                                 <div class="absolute flex flex-col items-center"
                                      :style="{
@@ -603,14 +603,14 @@
                                          cursor: Math.abs(offset - i) === 1 ? 'pointer' : 'default'
                                      }"
                                      @click="if (Math.abs(offset - i) === 1) { i < offset ? prevSlide() : nextSlide(); }">
-                                    <div class="flex flex-col px-4 py-3 min-[450px]:px-6 md:px-10 min-[450px]:py-6 md:py-8 rounded-[16px] bg-white w-[320px] h-[216px] min-[450px]:w-full min-[450px]:max-w-[280px] md:max-w-[363px] min-[450px]:h-auto overflow-hidden transition-opacity duration-200"
+                                    <div class="flex flex-col px-4 py-[10px] min-[440px]:px-6 md:px-6 min-[470px]:py-6 md:py-5 rounded-[16px] bg-white w-[320px] h-[186px] min-[450px]:w-full min-[450px]:max-w-[280px] md:max-w-[280px] min-[450px]:h-auto overflow-hidden transition-opacity duration-200"
                                          :class="Math.abs(offset - i) === 1 ? 'hover:opacity-80' : ''"
                                          :style="Math.abs(offset - i) === 0 ? {
                                              border: '1px solid rgba(185, 185, 185, 1)',
                                              borderRadius: '12px',
                                              background: 'rgba(244, 244, 244, 0.1)'
                                          } : {}">
-                                        <img class="mb-2 min-[450px]:mb-4 md:mb-6 w-[268px] h-[122px] min-[450px]:w-full min-[450px]:max-w-[240px] md:max-w-[315px] min-[450px]:h-[100px] md:h-[144px] object-contain mx-auto shrink-0" 
+                                        <img class="mb-2 min-[450px]:mb-4 md:mb-4 w-[268px] h-[112px] min-[450px]:w-full min-[450px]:max-w-[240px] md:max-w-[240px] min-[450px]:h-[100px] md:h-[80px] object-contain mx-auto shrink-0" 
                                              :src="getSlideAtPosition(i).image" 
                                              :alt="getSlideAtPosition(i).brand + ' ' + getSlideAtPosition(i).model"
                                              :style="{
@@ -618,9 +618,9 @@
                                                  transition: 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
                                                  willChange: 'transform'
                                              }">
-                                        <div class="text-grey-600 text-sm min-[450px]:text-lg md:text-2xl font-medium uppercase tracking-wider" 
+                                        <div class="text-grey-600 text-sm min-[450px]:text-lg md:text-xl font-medium uppercase tracking-wider" 
                                              x-text="getSlideAtPosition(i).brand"></div>
-                                        <div class="text-grey-500 text-sm min-[450px]:text-lg md:text-2xl uppercase tracking-wide" 
+                                        <div class="text-grey-500 text-sm min-[450px]:text-lg md:text-xl uppercase tracking-wide" 
                                              x-text="getSlideAtPosition(i).model"></div>
                                     </div>
                                 </div>
