@@ -166,11 +166,15 @@
 
     <div
         x-data="{ bgVideo: $el.dataset.bgVideo || null, bgPoster: $el.dataset.bgPoster || null }"
-        data-bg-video="https://cdn.prod.website-files.com/64be6a502b96d0a39fa58ced/64bf9a03e1e8bcdea2fc4966_vidéo-RML-accueil-transcode.webm"
-        class="bg-mp-hero pt-[88px] bg-no-repeat bg-position-38 md:bg-position-[unset] bg-cover h-[calc(100vh-30px)] md:h-auto flex flex-col relative overflow-hidden">
+        data-bg-video="/hero-video.mp4"
+        class="bg-mp-hero pt-[88px] bg-no-repeat bg-position-38 md:bg-position-[unset] bg-cover h-[calc(100vh-30px)] min-[1920px]:flex min-[1920px]:justify-center min-[1920px]:h-screen md:h-auto flex flex-col relative overflow-hidden">
         <template x-if="bgVideo">
-            <video autoplay muted loop playsinline preload="auto" x-bind:src="bgVideo" :poster="bgPoster"
-                class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"></video>
+            <div>
+                 <video autoplay muted loop playsinline preload="auto" x-bind:src="bgVideo" :poster="bgPoster"
+                    class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"></video>
+                <div class="absolute inset-0 bg-[#121212]/30 z-[5] pointer-events-none"></div>
+            </div>
+           
         </template>
         <div class="max-w-[1240px] lg:max-w-[80%] w-full mx-auto px-5 xl:px-0 flex flex-col h-full md:h-auto justify-between relative z-10">
             <section class="flex flex-col my-auto md:my-[152px] items-center md:items-start md:text-left text-center">
@@ -1133,7 +1137,7 @@
         </div>
     </section>
     <footer class="bg-[#030303] pt-[60px] pb-5 md:pb-10 w-screen overflow-x-hidden">
-        <div class="max-w-[1240px] mx-auto flex flex-col text-white px-6 xl:px-0">
+        <div class="max-w-[1240px] xl:max-w-[80%] mx-auto flex flex-col text-white px-6 xl:px-0">
             <div
                 class="max-w-[891px] mb-12 w-full mx-auto flex flex-col lg:flex-row items-center gap-y-6 lg:gap-y-0 lg:gap-x-8">
                 <div class="text-xl md:text-[22px] font-medium shrink-0">Stay updated:</div>
@@ -1152,7 +1156,7 @@
                     <img class="w-full" src="./assets/images/footer_bg.png" alt="Footer background">
                 </div>
                 <div
-                    class="relative z-5 grid gap-x-[43px] md:grid-cols-2 xl:grid-cols-[460px_193px_188px_188px] xl:gap-x-[43px]">
+                    class="relative z-5 grid gap-x-[43px] md:grid-cols-2 xl:grid-cols-4 xl:gap-x-[43px]">
                     <div class="flex flex-col mb-10 md:mb-0">
                         <img class="max-w-[279px] mb-6" src="./assets/images/logo.png" alt="Logo">
                         <div class="text-md max-w-[400px] mb-6">Mayfair Chauffeurs are a multi-award-winning chauffeur
