@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
-    <link rel="stylesheet" href="./assets/styles/index.css">
+   <link rel="stylesheet" href="./assets/styles/index.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="./tailwind.config.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
@@ -235,7 +235,7 @@
     <header x-data="{ scrolled: false }" x-on:scroll.window="scrolled = window.scrollY > 50"
         :class="scrolled ? 'bg-black/95 backdrop-blur-md' : ''"
         class="fixed top-0 left-0 right-0 z-[30] transition-all duration-500">
-        <div class="max-w-[1240px] mx-auto px-4 py-6">
+        <div class="max-w-[1240px] min-[1920px]:max-w-[80%] mx-auto px-4 py-6">
             <div class="flex items-center justify-between">
                 <a href="/" class="max-w-logo hidden md:block">
                     <img src="./assets/images/logo.png" alt="logo" :class="scrolled ? 'scale-95' : 'scale-100'"
@@ -263,7 +263,7 @@
 
     <div
         class="bg-mp-hero pt-[88px] bg-no-repeat bg-position-38 md:bg-position-[unset] bg-cover h-[70vh] md:h-auto flex flex-col">
-        <div class="max-w-[1240px] w-full mx-auto px-5 xl:px-0 flex flex-col h-full md:h-auto justify-between">
+        <div class="max-w-[1240px] min-[1920px]:max-w-[80%] w-full mx-auto px-5 xl:px-0 flex flex-col h-full md:h-auto justify-between">
 
 
             <section

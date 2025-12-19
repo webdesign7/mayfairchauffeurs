@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link rel="stylesheet" href="./assets/styles/index.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./tailwind.config.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        .scroll-hidden {
+            opacity: 0;
+        }
+        
+        .fade-in-up {
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in-up.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .fade-in {
+            transition: opacity 0.8s ease-out;
+        }
+        
+        .fade-in.show {
+            opacity: 1;
+        }
+        
+        .fade-in-left {
+            transform: translateX(-40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in-left.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .fade-in-right {
+            transform: translateX(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in-right.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .scale-in {
+            transform: scale(0.9);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .scale-in.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .bg-position-38 {
+            background-position: 38% center;
+        }
+        
+        @media (min-width: 640px) {
+            .bg-position-38 {
+                background-position: center;
+            }
+        }
+        
+        @keyframes infinite-scroll-partners {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        .animate-infinite-scroll-partners {
+            animation: infinite-scroll-partners 12s linear infinite;
+        }
+        
+        @media (min-width: 760px) {
+            .animate-infinite-scroll-partners {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body x-data="{ menuOpen: false }" 
+      x-on:keydown.escape.window="menuOpen = false"
+      :class="{ 'overflow-hidden': menuOpen }">
+    
+  <div x-show="menuOpen" x-transition:enter="transition-all ease-out duration-500"
+        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+        x-transition:leave="transition-all ease-in duration-500" x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0" class="fixed inset-0 bg-black z-50 flex items-center justify-center overflow-y-auto"
+        style="display: none;" x-data="{ 
+            expandedMenu: null,
+            menuItems: {
+                main: [
+                    { label: 'Home', link: '/' },
+                    { label: 'About Us', link: '/about.html' },
+                    { label: 'Contact', link: '/contact' }
+                ],
+                services: [
+                    { label: 'Airport Transfers', link: '/airport-transfers' },
+                    { label: 'Corporate Events', link: '/corporate-events' },
+                    { label: 'Business Travel', link: '/business-travel' },
+                    { label: 'Wedding Services', link: '/weddings' },
+                    { label: 'Chauffeur Hire', link: '/chauffeur-hire' }
+                ],
+                fleet: [
+                    { label: 'Mercedes-Benz S-Class', link: '/fleet/mercedes' },
+                    { label: 'BMW i7', link: '/fleet/bmw' },
+                    { label: 'Rolls-Royce Phantom', link: '/fleet/rolls-royce' },
+                    { label: 'View All Vehicles', link: '/fleet.html' }
+                ]
+            }
+        }">
+
+        <button @click="menuOpen = false"
+            class="absolute top-10 right-10 w-12 h-12 flex items-center justify-center text-white hover:text-grey-500 transition-colors duration-200 z-20">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M25 7L7 25M7 7L25 25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+        </button>
+
+        <nav class="md:hidden flex flex-col w-full gap-y-0 px-6 -translate-y-20 " x-show="menuOpen"
+            x-transition:enter="transition-all ease-out duration-700 delay-200"
+            x-transition:enter-start="opacity-0 translate-y-8" x-transition:enter-end="opacity-100"
+            x-transition:leave="transition-all ease-in duration-300" x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0">
+            
+            <template x-for="item in menuItems.main" :key="item.label">
+                <a :href="item.link" @click="menuOpen = false"
+                    class="text-[28px] font-light text-white hover:text-red-800 transition-colors duration-300 py-4 border-b border-grey-500">
+                    <span x-text="item.label"></span>
+                </a>
+            </template>
+
+            <button @click="expandedMenu = expandedMenu === 'services' ? null : 'services'"
+                class="w-full flex items-center justify-between text-[28px] font-light text-white hover:text-red-800 transition-colors duration-300 py-4 border-b border-grey-500 text-left">
+                <span>Services</span>
+                <svg class="w-6 h-6 transition-transform duration-300" :class="expandedMenu === 'services' ? 'rotate-90' : ''" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+            <div x-show="expandedMenu === 'services'" x-transition:enter="transition-all ease-out duration-300"
+                x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-[500px]"
+                x-transition:leave="transition-all ease-in duration-300"
+                x-transition:leave-start="opacity-100 max-h-[500px]" x-transition:leave-end="opacity-0 max-h-0"
+                class="overflow-hidden">
+                <template x-for="item in menuItems.services" :key="item.label">
+                    <a :href="item.link" @click="menuOpen = false"
+                        class="text-[20px] font-light text-grey-400 hover:text-red-800 transition-colors duration-300 py-3 pl-6 block">
+                        <span x-text="item.label"></span>
+                    </a>
+                </template>
+            </div>
+
+            <button @click="expandedMenu = expandedMenu === 'fleet' ? null : 'fleet'"
+                class="w-full flex items-center justify-between text-[28px] font-light text-white hover:text-red-800 transition-colors duration-300 py-4 border-b border-grey-500 text-left">
+                <span>Fleet</span>
+                <svg class="w-6 h-6 transition-transform duration-300" :class="expandedMenu === 'fleet' ? 'rotate-90' : ''" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+            <div x-show="expandedMenu === 'fleet'" x-transition:enter="transition-all ease-out duration-300"
+                x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-[500px]"
+                x-transition:leave="transition-all ease-in duration-300"
+                x-transition:leave-start="opacity-100 max-h-[500px]" x-transition:leave-end="opacity-0 max-h-0"
+                class="overflow-hidden">
+                <template x-for="item in menuItems.fleet" :key="item.label">
+                    <a :href="item.link" @click="menuOpen = false"
+                        class="text-[20px] font-light text-grey-400 hover:text-red-800 transition-colors duration-300 py-3 pl-6 block">
+                        <span x-text="item.label"></span>
+                    </a>
+                </template>
+            </div>
+        </nav>
+
+        <nav class="hidden md:flex gap-x-20 lg:gap-x-40 pt-20 pb-10 px-10 max-w-5xl" x-show="menuOpen"
+            x-transition:enter="transition-all ease-out duration-700 delay-200"
+            x-transition:enter-start="opacity-0 translate-y-8" x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition-all ease-in duration-300" x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0">
+            
+            <div class="flex flex-col gap-y-6">
+                <template x-for="item in menuItems.main" :key="item.label">
+                    <a :href="item.link" @click="menuOpen = false"
+                        class="text-[20px] md:text-2xl font-light text-white hover:text-red-800 transition-colors duration-300">
+                        <span x-text="item.label"></span>
+                    </a>
+                </template>
+            </div>
+
+            <div class="flex flex-col gap-y-4">
+                <h3 class="text-[24px] md:text-3xl font-light text-white mb-2">Services</h3>
+                <template x-for="item in menuItems.services" :key="item.label">
+                    <a :href="item.link" @click="menuOpen = false"
+                        class="text-[16px] md:text-lg font-light text-grey-400 hover:text-red-800 transition-colors duration-300">
+                        <span x-text="item.label"></span>
+                    </a>
+                </template>
+            </div>
+
+            <div class="flex flex-col gap-y-4">
+                <h3 class="text-[24px] md:text-3xl font-light text-white mb-2">Fleet</h3>
+                <template x-for="item in menuItems.fleet" :key="item.label">
+                    <a :href="item.link" @click="menuOpen = false"
+                        class="text-[16px] md:text-lg font-light text-grey-400 hover:text-red-800 transition-colors duration-300">
+                        <span x-text="item.label"></span>
+                    </a>
+                </template>
+            </div>
+        </nav>
+    </div>
+
+      <header x-data="{ scrolled: false }" x-on:scroll.window="scrolled = window.scrollY > 50"
+        :class="scrolled ? 'bg-black/95 backdrop-blur-md' : ''"
+        class="fixed top-0 left-0 right-0 z-[30] transition-all duration-500">
+        <div class="max-w-[1240px]  min-[1920px]:max-w-[80%] mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <a href="/" class="max-w-logo hidden md:block">
+                    <img src="./assets/images/logo.png" alt="logo" :class="scrolled ? 'scale-95' : 'scale-100'"
+                        class="transition-transform duration-500">
+                </a>
+                <a href="/" class="max-w-logo block md:hidden">
+                    <img src="./assets/images/logo_mobile.svg" alt="logo" :class="scrolled ? 'scale-95' : 'scale-100'"
+                        class="transition-transform duration-500">
+                </a>
+
+                <div class="flex items-center gap-x-5 md:gap-x-10">
+                    <a href="#"
+                        class="text-white bg-red-800 hover:bg-red-900 duration-200 h-10 w-[120px] md:w-[160px] flex items-center justify-center rounded-[4px] text-md md:text-[18px] font-medium">
+                        Book
+                    </a>
+                    <div @click="menuOpen = true" class="flex items-center gap-x-3 hover:cursor-pointer">
+                        <img src="./assets/images/menuIcon.svg" alt="Menu Icon">
+                        <span class="text-white text-[18px] font-medium hidden md:block">Menu</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="bg-mp-hero pt-[88px] bg-no-repeat bg-position-38 md:bg-position-[unset] bg-cover h-[70vh] flex flex-col xl:justify-end">
+        <div class="max-w-[1240px] min-[1920px]:max-w-[80%] w-full mx-auto px-5 xl:px-0 flex flex-col h-full md:h-auto justify-between">
+           
+            <section class="flex md:pb-[60px] pb-0 justify-center flex-1 md:flex-initial md:justify-between items-center md:mt-[321px] text-center md:text-left">
+                <div class="flex flex-col gap-y-2.5">
+                    <div class="text-white text-[44px] sm:text-[52px] leading-[100%] uppercase font-medium">Weddings</div>
+                    <div class="text-grey-400 leading-[100%]">Embark on an unforgettable journey with:</div>
+                </div>
+                <div class="md:block hidden items-center justify-center md:justify-end">
+                    <img class="max-w-[84px] md:max-w-[126px]" src="./assets/images/trustpilot.png" alt="Trustpilot image">
+                </div>
+            </section>
+
+            <div class="pb-[60px] md:hidden flex items-center justify-center md:justify-end">
+                <img class="max-w-[84px] md:max-w-[126px]" src="./assets/images/trustpilot.png" alt="Trustpilot image">
+            </div>
+           
+        </div>
+    </div>
+
+    <div class="w-full py-2.5 bg-grey-50 xl:px-0 px-6">
+        <div class="max-w-[1240px] mx-auto flex items-center text-grey-500 text-[18px] tracking-[10%] font-medium">
+            <a class="pr-[18.5px] relative before:content-[''] before:w-[1px] before:h-4 
+            before:-translate-y-1/2 before:absolute
+            before:top-1/2 before:right-0 before:bg-grey-500" href="/">Home</a>
+            <a class="pl-[17.5px]" href="/weddings.html">Weddings</a>
+        </div>
+    </div>
+
+    <div class="my-20 md:my-[100px]">
+        <div class="max-w-[1240px] min-h-[600px] mx-auto px-0 md:px-6 xl:px-0">
+            <div class="flex items-center lg:flex-row flex-col justify-between border-b border-grey-600 pb-10">
+            <div class="flex flex-col lg:mb-0 mb-10 md:px-0 px-6">
+                <div class="text-sm text-red-800 mb-[10px] tracking-[3px]">Finnest Transport</div>
+                <div class="text-grey-600 lg:max-w-[560px] mb-7 md:mb-10 font-medium leading-[43px] md:text-4xl capitalize text-[28px]">We value our clients and want them to have a nice experience</div>
+                <div class="text-md max-w-[700px]">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident facere ea eaque. Quo veritatis, accusamus nisi, facilis cumque illum commodi officia minus perspiciatis recusandae autem, nesciunt incidunt voluptate odit consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus eaque temporibus, laborum amet quasi similique iusto voluptatibus dolore tenetur earum officia id sapiente nostrum illum officiis! Nesciunt, corporis accusamus? Ea?</div>
+                <div class="text-md max-w-[700px]">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident facere ea eaque. Quo veritatis, accusamus nisi, facilis cumque illum commodi officia minus perspiciatis recusandae autem, nesciunt incidunt voluptate odit consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus eaque temporibus, laborum amet quasi similique iusto voluptatibus dolore tenetur earum officia id sapiente nostrum illum officiis! Nesciunt, corporis accusamus? Ea?</div>
+                <div class="text-grey-600 font-medium text-lg capitalize mt-8 mb-5">Book your dream wedding chauffeur today</div>
+                <a href="#" class="text-white bg-red-800 hover:bg-red-900 duration-200 h-10 w-[120px] md:w-[160px] flex items-center justify-center text-md md:text-[18px] font-medium">
+                        Book
+                </a>
+            </div>
+            <div class="h-[280px] md:h-[524px] lg:max-w-[324px] w-full flex grow">
+                <img class="h-full w-full lg:w-auto object-cover" src="./assets/images/about1.png" alt="">
+            </div>
+        </div>
+        </div>
+        <div class="container grid grid-cols-2 md:grid-cols-4 pt-10 gap-x-5 gap-y-10 sm:gap-x-8 grid-rows-1 px-6 xl:px-0">
+            <div x-intersect.half.once="$el.classList.add('show')" class="flex sm:max-w-[unset] mx-auto flex-col w-full scale-in scroll-hidden show" style="transition-delay: 0.1s;">
+                <img class="w-8 h-8" src="./assets/icons/insured.svg" alt="Insured">
+                <div class="h-[1px] my-4 w-full max-w-[291px] bg-gradient-grey"></div>
+                <div class="text-grey-600 uppercase mb-6 sm:text-xl leading-[29px] font-medium">Clean & Comfortable</div>
+                <div class="text-[14px] sm:text-md leading-[150%]">Complete peace of mind with comprehensive coverage</div>
+            </div>
+            <div x-intersect.half.once="$el.classList.add('show')" class="flex sm:max-w-[unset] mx-auto flex-col w-full scale-in scroll-hidden show" style="transition-delay: 0.1s;">
+                <img class="w-8 h-8" src="./assets/icons/insured.svg" alt="Insured">
+                <div class="h-[1px] my-4 w-full max-w-[291px] bg-gradient-grey"></div>
+                <div class="text-grey-600 uppercase mb-6 sm:text-xl leading-[29px] font-medium">Clean & Comfortable</div>
+                <div class="text-[14px] sm:text-md leading-[150%]">Complete peace of mind with comprehensive coverage</div>
+            </div>
+            <div x-intersect.half.once="$el.classList.add('show')" class="flex sm:max-w-[unset] mx-auto flex-col w-full scale-in scroll-hidden show" style="transition-delay: 0.1s;">
+                <img class="w-8 h-8" src="./assets/icons/insured.svg" alt="Insured">
+                <div class="h-[1px] my-4 w-full max-w-[291px] bg-gradient-grey"></div>
+                <div class="text-grey-600 uppercase mb-6 sm:text-xl leading-[29px] font-medium">Clean & Comfortable</div>
+                <div class="text-[14px] sm:text-md leading-[150%]">Complete peace of mind with comprehensive coverage</div>
+            </div>
+            <div x-intersect.half.once="$el.classList.add('show')" class="flex sm:max-w-[unset] mx-auto flex-col w-full scale-in scroll-hidden show" style="transition-delay: 0.1s;">
+                <img class="w-8 h-8" src="./assets/icons/insured.svg" alt="Insured">
+                <div class="h-[1px] my-4 w-full max-w-[291px] bg-gradient-grey"></div>
+                <div class="text-grey-600 uppercase mb-6 sm:text-xl leading-[29px] font-medium">Clean & Comfortable</div>
+                <div class="text-[14px] sm:text-md leading-[150%]">Complete peace of mind with comprehensive coverage</div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="container px-6 xl:px-0">
+        <div class="flex flex-col gap-y-5 md:grid md:grid-cols-[380px_1fr]  mb-6 gap-x-4">
+            <div class="bg-[#F9EAE5] w-full md:max-w-[380px] px-7 py-14 rounded-lg flex flex-col">
+                <div class="text-2xl mb-5 font-medium tracking-[4px] capitalize">Luxury Wedding Chauffeur</div>
+                <div class="text-[12px]">Tortor condimentum lacinia quis vel eros donec odio.
+                Feugiat fermentum in posuere urna. Faucibus turpis in eun mi bibendum.</div>
+                <div class="text-[12px]">Tortor condimentum lacinia quis vel eros donec odio.</div>
+                <div class="text-[12px]">Feugiat fermentum in posuere urna. Faucibus turpis in eun mi bibendum. Tortor condimentum lacinia quis vel eros donec odio. Feugiat fermentum in posuere urna. Faucibus turpis in eun mi bibendum.</div>
+            </div>
+            <img class="w-full h-full max-h-[340px] object-cover" src="./assets/images/car1.png" alt="">
+        </div>
+        <div class="flex flex-col gap-y-5 md:grid md:grid-cols-[380px_1fr]  mb-6 gap-x-4">
+            <div class="bg-[#EBEBEB] w-full md:max-w-[380px] px-7 py-14 rounded-lg flex flex-col">
+                <div class="text-2xl mb-5 font-medium tracking-[4px] capitalize">Complete & exceptional service</div>
+                <div class="text-[12px]">Tortor condimentum lacinia quis vel eros donec odio.
+                Feugiat fermentum in posuere urna. Faucibus turpis in eun mi bibendum.</div>
+                <div class="text-[12px]">Tortor condimentum lacinia quis vel eros donec odio.</div>
+                <div class="text-[12px]">Feugiat fermentum in posuere urna. Faucibus turpis in eun mi bibendum. Tortor condimentum lacinia quis vel eros donec odio. Feugiat fermentum in posuere urna. Faucibus turpis in eun mi bibendum.</div>
+            </div>
+            <img class="w-full h-full max-h-[340px] object-cover" src="./assets/images/car1.png" alt="">
+        </div>
+    </div>
+
+    <section class="max-w-[840px] mx-auto py-20 md:pb-20 pb-0 md:py-[100px] xl:px-0 px-6">
+        <div class="text-[28px] md:text-4xl uppercase font-medium mb-10">Enjoy Your Journey with Best Chauffeurs Services</div>
+        <div class="text-md mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        <div class="text-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+    </section>
+
+    <section class="relative h-[220px] md:mt-0 mt-20 md:h-[402px] overflow-hidden" x-data="{ 
+                 parallaxOffset: 0,
+                 updateParallax() {
+                     const section = $el;
+                     const rect = section.getBoundingClientRect();
+                     const windowHeight = window.innerHeight;
+                     const sectionMiddle = rect.top + rect.height / 2;
+                     const windowMiddle = windowHeight / 2;
+                     const distance = windowMiddle - sectionMiddle;
+                     const isMobile = window.innerWidth &lt; 768;
+                     const parallaxSpeed = isMobile ? 0.4 : 0.3;
+                     this.parallaxOffset = distance * parallaxSpeed;
+                 }
+             }" x-init="updateParallax(); window.addEventListener('scroll', () =&gt; updateParallax()); window.addEventListener('resize', () =&gt; updateParallax())" @scroll.window="updateParallax()">
+        <img src="./assets/images/about/about_parrallax1.jpg" alt="Parallax image" class="absolute grayscale w-full h-auto min-h-[200%] md:min-h-[150%] object-cover top-1/2 left-0 -translate-y-1/2" :style="`transform: translateY(calc(-52% + ${parallaxOffset}px))`" style="transform: translateY(calc(-52% + -49.4765625px))">
+    </section>
+
+
+
+    
+     <section class="mb-[100px]" x-data="{
+                    offset: 0,
+                    displayedOffset: 0,
+                    isAnimating: false,
+                    growingSides: false,
+                    direction: 0,
+                    contentVisible: true,
+                    touchStartX: 0,
+                    touchEndX: 0,
+                    touchStartY: 0,
+                    isSwiping: false,
+                    handleTouchStart(e) {
+                        this.touchStartX = e.touches[0].clientX;
+                        this.touchStartY = e.touches[0].clientY;
+                        this.isSwiping = false;
+                    },
+                    handleTouchMove(e) {
+                        if (!this.touchStartX) return;
+                        this.touchEndX = e.touches[0].clientX;
+                        const touchEndY = e.touches[0].clientY;
+                        const diffX = Math.abs(this.touchStartX - this.touchEndX);
+                        const diffY = Math.abs(this.touchStartY - touchEndY);
+                        
+                        if (diffX > diffY && diffX > 10) {
+                            this.isSwiping = true;
+                            e.preventDefault();
+                        }
+                    },
+                    handleTouchEnd() {
+                        if (!this.touchStartX || !this.touchEndX || !this.isSwiping) {
+                            this.touchStartX = 0;
+                            this.touchEndX = 0;
+                            this.isSwiping = false;
+                            return;
+                        }
+                        const diff = this.touchStartX - this.touchEndX;
+                        const minSwipeDistance = 50;
+                        if (Math.abs(diff) > minSwipeDistance) {
+                            if (diff > 0) {
+                                this.nextSlide();
+                            } else {
+                                this.prevSlide();
+                            }
+                        }
+                        this.touchStartX = 0;
+                        this.touchEndX = 0;
+                        this.isSwiping = false;
+                    },
+                    slides: [
+                        { 
+                            id: 0, 
+                            image: './assets/images/slider/slider1.png',
+                            mainImage: './assets/images/bmwi7.jpg',
+                            brand: 'BMW', 
+                            model: 'i7',
+                            description: 'Experience the pinnacle of electric luxury with cutting-edge technology and unparalleled comfort in every journey.',
+                            capacity: 'Up to 4 passengers',
+                            luggage: '3 large suitcases',
+                            features: 'WiFi, Climate Control, Premium Sound'
+                        },
+                        { 
+                            id: 1, 
+                            image: './assets/images/slider/slider2.png',
+                            mainImage: './assets/images/main-car.png',
+                            brand: 'MERCEDES-BENZ', 
+                            model: 'S-CLASS',
+                            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis.',
+                            capacity: 'Up to 3 passengers',
+                            luggage: '2 large suitcases',
+                            features: 'WiFi, Climate Control, Premium Sound'
+                        },
+                        { 
+                            id: 2, 
+                            image: './assets/images/slider/slider3.png',
+                            mainImage: './assets/images/rollsroyce.avif',
+                            brand: 'ROLLS-ROYCE', 
+                            model: 'PHANTOM VIII',
+                            description: 'The epitome of luxury and prestige, offering an unrivaled chauffeur experience with timeless elegance and supreme comfort.',
+                            capacity: 'Up to 4 passengers',
+                            luggage: '4 large suitcases',
+                            features: 'WiFi, Climate Control, Premium Sound'
+                        }
+                    ],
+                    getSlideAtPosition(position) {
+                        const total = this.slides.length;
+                        const index = ((position % total) + total) % total;
+                        return this.slides[index];
+                    },
+                  getPositionForSlide(slidePosition) {
+                        const width = window.innerWidth;
+                        
+                        let cardWidth;
+                        if (width >= 1024) { // lg
+                            cardWidth = 363; // lg:w-[363px]
+                        } else if (width >= 768) { // md
+                            cardWidth = 280; // md:max-w-[280px]
+                        } else if (width >= 450) { // min-[450px]
+                            cardWidth = 280; // min-[450px]:max-w-[280px]
+                        } else {
+                            cardWidth = 320; // w-[320px]
+                        }
+                        
+                        const gap = cardWidth * 0.1;
+                        
+                        return (slidePosition - this.offset) * (cardWidth + gap);
+                    },
+                    getScaleForSlide(slidePosition) {
+                        const relativePos = slidePosition - this.offset;
+                        const distance = Math.abs(relativePos);
+                        
+                        if (distance === 0) return 1;
+                        
+                        if (distance === 1) {
+                            if (this.growingSides) {
+                                if (this.direction === 1 && relativePos === 1) {
+                                    return 0.1;
+                                }
+                                if (this.direction === -1 && relativePos === -1) {
+                                    return 0.1;
+                                }
+                            }
+                            return 1;
+                        }
+                        
+                        return 0.1;
+                    },
+                    getOpacityForSlide(slidePosition) {
+                        const distance = Math.abs(slidePosition - this.offset);
+                        
+                        if (distance === 0) return 1;
+                        if (distance === 1) return 1;
+                        if (distance === 2) return 0.1;
+                        return 0;
+                    },
+                    getZIndexForSlide(slidePosition) {
+                        const distance = Math.abs(slidePosition - this.offset);
+                        const zIndexes = [20, 10, 5, 1, 0, 0];
+                        return zIndexes[Math.min(distance, zIndexes.length - 1)];
+                    },
+                    nextSlide() {
+                        if (this.isAnimating) return;
+                        this.isAnimating = true;
+                        this.growingSides = true;
+                        this.direction = 1;
+                        
+                        this.offset++;
+                        
+                        this.contentVisible = false;
+                        
+                        setTimeout(() => {
+                            this.displayedOffset++;
+                            setTimeout(() => {
+                                this.contentVisible = true;
+                            }, 50);
+                        }, 250);
+                        
+                        setTimeout(() => {
+                            this.growingSides = false;
+                            
+                            setTimeout(() => {
+                                this.isAnimating = false;
+                                this.direction = 0;
+                            }, 400);
+                        }, 200);
+                    },
+                    prevSlide() {
+                        if (this.isAnimating) return;
+                        this.isAnimating = true;
+                        this.growingSides = true;
+                        this.direction = -1;
+                        
+                        this.offset--;
+                        
+                        this.contentVisible = false;
+                        
+                        setTimeout(() => {
+                            this.displayedOffset--;
+                            setTimeout(() => {
+                                this.contentVisible = true;
+                            }, 50);
+                        }, 250);
+                        
+                        setTimeout(() => {
+                            this.growingSides = false;
+                            
+                            setTimeout(() => {
+                                this.isAnimating = false;
+                                this.direction = 0;
+                            }, 400);
+                        }, 200);
+                    },
+                    goToSlide(index) {
+                        if (this.isAnimating) return;
+                        this.isAnimating = true;
+                        this.growingSides = true;
+                        this.direction = index > this.offset ? 1 : -1;
+                        
+                        this.offset = index;
+                        
+                        this.contentVisible = false;
+                        
+                        setTimeout(() => {
+                            this.displayedOffset = index;
+                            setTimeout(() => {
+                                this.contentVisible = true;
+                            }, 50);
+                        }, 250);
+                        
+                        setTimeout(() => {
+                            this.growingSides = false;
+                            
+                            setTimeout(() => {
+                                this.isAnimating = false;
+                                this.direction = 0;
+                            }, 400);
+                        }, 200);
+                    },
+                    get currentSlideIndex() {
+                        return ((this.displayedOffset % this.slides.length) + this.slides.length) % this.slides.length;
+                    },
+                    get currentSlide() {
+                        return this.slides[this.currentSlideIndex];
+                    }
+                }">
+        <div class="container mt-20 md:mt-[100px] px-6 xl:px-0">
+            <div x-intersect.half.once="$el.classList.add('show')"
+                class="text-center mb-6 md:mb-20 mx-auto font-medium fade-in-up scroll-hidden">
+                <div class="capitalize text-[28px] md:text-4xl text-grey-600 max-w-[480px] font-medium text-center leading-[110%] mx-auto mb-6">Out <span class="text-red-800">exquisite wedding</span>  car collection</div>
+                <div class="text-md text-sm font-light text-grey-500">Choose from a stunning selection of classic wedding cars and modern luxury vehicles, including:</div>
+            </div>
+            <div class="flex flex-col">
+                <div class="flex flex-col lg:flex-row items-center md:mb-6 gap-6 lg:gap-0"
+                    @touchstart="handleTouchStart($event)" @touchmove="handleTouchMove($event)"
+                    @touchend="handleTouchEnd()">
+                    <img class="h-[300px] md:h-[350px] lg:h-[440px] object-cover transition-all duration-300 rounded-[12px] w-full lg:w-[698px]"
+                        :class="contentVisible ? 'opacity-100' : 'opacity-0'" :src="currentSlide.mainImage"
+                        :alt="currentSlide.brand + ' ' + currentSlide.model">
+                    <div class="flex flex-col shrink-0 w-full lg:max-w-[542px] lg:grow-[2] lg:min-h-[300px] lg:-translate-x-[80px] rounded-[12px] bg-white/70 md:px-10 py-5 transition-all duration-300"
+                        :class="contentVisible ? 'opacity-100' : 'opacity-0'">
+                        <div class="text-grey-600 text-[22px] leading-[100%] md:text-[32px] mb-5 font-medium uppercase">
+                            <span x-text="currentSlide.brand"></span> <span class="text-grey-500"
+                                x-text="currentSlide.model"></span>
+                        </div>
+                        <div class="text-md md:text-md text-grey-600 leading-[170%] mb-5"
+                            x-text="currentSlide.description"></div>
+                        <ul class="p-0 md:p-[10px] text-grey-600 mb-5 text-md md:text-base">
+                            <li class="mb-3 leading-[100%]"><span class="font-medium">Capacity:</span> <span
+                                    x-text="currentSlide.capacity"></span></li>
+                            <li class="mb-3 leading-[100%]"><span class="font-medium">Luggage:</span> <span
+                                    x-text="currentSlide.luggage"></span></li>
+                            <li class=" leading-[100%]"><span class="font-medium">Features:</span> <span
+                                    x-text="currentSlide.features"></span></li>
+                        </ul>
+                        <div class="flex flex-row items-stretch sm:items-center gap-3">
+                            <a href=""
+                                class="bg-red-800 hover:bg-red-900 transition-colors duration-200 text-white font-medium px-6 md:px-10 py-3 rounded-[4px] text-center text-[18px] md:text-base">Book
+                                This Car</a>
+                            <a href=""
+                                class="bg-transparent hover:bg-red-900 hover:border-red-900 hover:text-white transition-colors duration-200 text-grey-600 font-medium px-6 md:px-10 py-3 rounded-[4px] text-center text-[18px] md:text-base border border-grey-300">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative flex flex-col items-center overflow-hidden">
+
+                    <div class="relative max-w-[950px] lg:max-w-[unset] flex items-center justify-center w-full pb-4 pt-6 sm:py-0"
+                        @touchstart="handleTouchStart($event)" @touchmove="handleTouchMove($event)"
+                        @touchend="handleTouchEnd()">
+                        <button @click="prevSlide()"
+                            class="absolute left-0 z-20 transition-all duration-200 hidden md:block">
+                            <img class="rotate-180" src="./assets/icons/slider-arrow.svg" alt="Slider arrow">
+                        </button>
+
+                        <div
+                            class="relative w-full max-w-[1400px] min-h-[225px] lg:max-w-[unset] md:min-h-[250px] lg:min-h-[270px] flex items-center justify-center overflow-x-hidden">
+                            <template x-for="i in Array.from({length: 21}, (_, i) => i - 10)" :key="'slide-' + i">
+                                <div class="absolute flex flex-col items-center" :style="{
+                                         transform: `translateX(${getPositionForSlide(i)}px)`,
+                                         opacity: getOpacityForSlide(i),
+                                         zIndex: getZIndexForSlide(i),
+                                         pointerEvents: Math.abs(offset - i) > 1 ? 'none' : 'auto',
+                                         visibility: Math.abs(offset - i) > 1 ? 'hidden' : 'visible',
+                                         transition: 'transform 0.6s cubic-bezier(0.42, 0, 0.58, 1), opacity 0.6s ease-in-out',
+                                         willChange: 'transform, opacity',
+                                         cursor: Math.abs(offset - i) === 1 ? 'pointer' : 'default'
+                                     }"
+                                    @click="if (Math.abs(offset - i) === 1) { i < offset ? prevSlide() : nextSlide(); }">
+                                    <div class="flex flex-col px-4 py-[10px] min-[440px]:px-6 md:px-6 min-[470px]:py-6 md:py-5 rounded-[16px] bg-white w-[320px] h-[186px] min-[450px]:w-full min-[450px]:max-w-[280px] lg:w-[363px] md:max-w-[280px] lg:max-w-[363px] min-[450px]:h-auto overflow-hidden transition-opacity duration-200"
+                                        :class="Math.abs(offset - i) === 1 ? 'hover:opacity-80' : ''" :style="Math.abs(offset - i) === 0 ? {
+                                             border: '1px solid rgba(185, 185, 185, 1)',
+                                             borderRadius: '12px',
+                                             background: 'rgba(244, 244, 244, 0.1)'
+                                         } : {}">
+                                        <img class="mb-2 min-[450px]:mb-4 md:mb-4 w-[268px] h-[112px] min-[450px]:w-full min-[450px]:max-w-[240px] md:max-w-[240px] min-[450px]:h-[100px] md:h-[120px] lg:h-[144px] lg:w-[315px] object-contain mx-auto shrink-0"
+                                            :src="getSlideAtPosition(i).image"
+                                            :alt="getSlideAtPosition(i).brand + ' ' + getSlideAtPosition(i).model"
+                                            :style="{
+                                                 transform: `scale(${getScaleForSlide(i)})`,
+                                                 transition: 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                                                 willChange: 'transform'
+                                             }">
+                                        <div class="text-grey-600 text-sm min-[450px]:text-lg md:text-xl font-medium uppercase tracking-wider"
+                                            x-text="getSlideAtPosition(i).brand"></div>
+                                        <div class="text-grey-500 text-sm min-[450px]:text-lg md:text-xl uppercase tracking-wide"
+                                            x-text="getSlideAtPosition(i).model"></div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+
+                        <button @click="nextSlide()"
+                            class="absolute right-0 z-20 transition-all duration-200 hidden md:block">
+                            <img src="./assets/icons/slider-arrow.svg" alt="Slider arrow">
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-3 mt-4">
+                        <template x-for="(slide, index) in slides" :key="'dot-' + slide.id">
+                            <button @click="goToSlide(index)" class="h-2 rounded-full transition-all duration-300"
+                                :class="{
+                                        'bg-red-950 w-10': currentSlideIndex === index,
+                                        'bg-grey-400 w-2': currentSlideIndex !== index
+                                    }">
+                            </button>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+   
+    <footer class="bg-[#030303] pt-[60px] pb-5 md:pb-10 w-screen overflow-x-hidden">
+        <div class="max-w-[1240px] mx-auto flex flex-col text-white px-6 xl:px-0">
+            <div class="max-w-[891px] mb-12 w-full mx-auto flex flex-col lg:flex-row items-center gap-y-6 lg:gap-y-0 lg:gap-x-8">
+                <div class="text-xl md:text-[22px] font-medium shrink-0">Stay updated:</div>
+                <div class="flex items-center gap-x-4 lg:gap-x-8 justify-center lg:justify-start flex-1 w-full lg:max-w-none">
+                    <input class="border bg-transparent p-3 rounded-[4px] border-grey-100 outline-none text-[12px] md:text-sm grow max-w-[462px] w-full placeholder:text-white" placeholder="Enter email to receive updates and newsletters..." type="text">
+                    <button class="bg-grey-250 max-w-[90px] md:max-w-[210px] w-full h-[46px] flex items-center text-[12px] justify-center rounded-[4px] md:text-[18px] font-medium shrink-0">Subscribe</button>
+                </div>
+            </div>
+            <div class="border-t border-b border-white py-12 relative">
+                <div class="absolute -z-1 right-0 md:-right-10 top-[50%] -left-20 w-[120%] md:w-full md:left-[unset] md:top-5 translate-y-[-50%] md:translate-y-0 max-w-[715px] opacity-15 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-footer-bg-gradient before:z-10">
+                    <img class="w-full" src="./assets/images/footer_bg.png" alt="Footer background">
+                </div>
+                <div class="relative z-5 grid gap-x-[43px] md:grid-cols-2 xl:grid-cols-[460px_193px_188px_188px] xl:gap-x-[43px]">
+                    <div class="flex flex-col mb-10 md:mb-0">
+                        <img class="max-w-[279px] mb-6" src="./assets/images/logo.png" alt="Logo">
+                        <div class="text-md max-w-[400px] mb-6">Mayfair Chauffeurs are a multi-award-winning chauffeur company providing professional chauffeur services.</div>
+                        <div class="text-grey-500 flex flex-col gap-y-2 mb-6">
+                            <a href="tel:+442071172905" class="flex items-center gap-x-2 hover:text-grey-100 duration-200">
+                                <img src="./assets/icons/plus.svg" alt="Plus">
+                                <span>+44 (0) 207 117 2905</span>
+                            </a>
+                            <a href="mailto:info@egchauffeurs.com" class="flex items-center gap-x-2 hover:text-grey-100 duration-200">
+                                <img src="./assets/icons/plus.svg" alt="Plus">
+                                <span>info@egchauffeurs.com</span>
+                            </a>
+                            <div class="flex items-center gap-x-2">
+                                <img src="./assets/icons/plus.svg" alt="Plus">
+                                <span>Operator Licence No: 00863101</span>
+                            </div>
+                            <div class="flex items-center gap-x-2">
+                                <img src="./assets/icons/plus.svg" alt="Plus">
+                                <span>Vat No: 191600718</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-x-3 mb-10 md:mb-0">
+                            <img class="max-w-[128px]" src="./assets/icons/trustpilot.svg" alt="">
+                            <img src="./assets/icons/trustpilot_logo_white.svg" alt="Trustpilot">
+                        </div>
+                    </div>
+                    <div class="flex flex-col mb-10 md:mb-0">
+                        <div class="text-[18px] mb-6 font-medium">Links</div>
+                        <div class="flex flex-col gap-y-3">
+                            <a href="#" class="hover:text-grey-100 duration-200">About Us</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Services</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Fleet</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Contact Us</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Terms and Conditions</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Privacy Policy</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col mb-10 md:mb-0">
+                        <div class="text-[18px] mb-6 font-medium">Cars</div>
+                        <div class="flex flex-col gap-y-3">
+                            <a href="#" class="hover:text-grey-100 duration-200">Mercedes S Class</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Mercedes V Class</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">BMW I7 Series</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Range Rover Vogue</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Rolls Royce Phantom</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="text-[18px] mb-6 font-medium">Services</div>
+                        <div class="flex flex-col gap-y-3">
+                            <a href="#" class="hover:text-grey-100 duration-200">Airport Transfers</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Corporate Events</a>
+                            <a href="#" class="hover:text-grey-100 duration-200">Rolls Royce Phantom</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center justify-between w-full pt-12 md:flex-row flex-col">
+                <div class="text-[18px] text-grey-100 md:order-1 order-2 md:mt-0 mt-8">Copyright 2025</div>
+                <div class="flex items-center gap-x-8 md:order-2 order-1">
+                    <a href="#"><img class="max-w-5 max-h-5" src="./assets/icons/socials/linkedin.svg" alt="Linkedin"></a>
+                    <a href="#"><img class="max-w-5 max-h-5" src="./assets/icons/socials/instagram.svg" alt="Instagram"></a>
+                    <a href="#"><img class="max-w-5 max-h-5" src="./assets/icons/socials/dribble.svg" alt="Dribble"></a>
+                    <a href="#"><img class="max-w-5 max-h-5" src="./assets/icons/socials/facebook.svg" alt="Facebook"></a>
+                    <a href="#"><img class="max-w-5 max-h-5" src="./assets/icons/socials/x.svg" alt="X"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

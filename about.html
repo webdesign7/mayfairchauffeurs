@@ -226,14 +226,14 @@
      <header x-data="{ scrolled: false }" x-on:scroll.window="scrolled = window.scrollY > 50"
         :class="scrolled ? 'bg-black/95 backdrop-blur-md' : ''"
         class="fixed top-0 left-0 right-0 z-[30] transition-all duration-500">
-        <div class="max-w-[1240px] mx-auto px-4 py-6">
+        <div class="max-w-[1240px] min-[1920px]:max-w-[80%] mx-auto px-4 py-6">
             <div class="flex items-center justify-between">
                 <a href="/" class="max-w-logo hidden md:block">
-                    <img src="./assets/images/logo.png" alt="logo" :class="scrolled ? 'scale-95' : 'scale-100'"
+                    <img src="./assets/images/logo.png" alt="logo" x-bind:class="scrolled ? 'scale-95' : 'scale-100'"
                         class="transition-transform duration-500">
                 </a>
                 <a href="/" class="max-w-logo block md:hidden">
-                    <img src="./assets/images/logo_mobile.svg" alt="logo" :class="scrolled ? 'scale-95' : 'scale-100'"
+                    <img src="./assets/images/logo_mobile.svg" alt="logo" x-bind:class="scrolled ? 'scale-95' : 'scale-100'"
                         class="transition-transform duration-500">
                 </a>
 
@@ -252,7 +252,7 @@
     </header>
 
     <div class="bg-mp-hero pt-[88px] bg-no-repeat bg-position-38 md:bg-position-[unset] bg-cover h-[70vh] md:h-auto flex flex-col">
-        <div class="max-w-[1240px] w-full mx-auto px-5 xl:px-0 flex flex-col h-full md:h-auto justify-between">
+        <div class="max-w-[1240px] min-[1920px]:max-w-[80%] w-full mx-auto px-5 xl:px-0 flex flex-col h-full md:h-auto justify-between">
           
 
             <section class="flex md:pb-[60px] pb-0 justify-center flex-1 md:flex-initial md:justify-between items-center md:mt-[321px] text-center md:text-left">
