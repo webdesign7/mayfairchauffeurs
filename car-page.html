@@ -6,94 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
-   <link rel="stylesheet" href="./assets/styles/index.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="./tailwind.config.js"></script>
+    <link rel="stylesheet" href="./assets/styles/index.css">
+    <link rel="stylesheet" href="/dist/output.css">
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <style>
-        .scroll-hidden {
-            opacity: 0;
-        }
-
-        .fade-in-up {
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .fade-in-up.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .fade-in {
-            transition: opacity 0.8s ease-out;
-        }
-
-        .fade-in.show {
-            opacity: 1;
-        }
-
-        .fade-in-left {
-            transform: translateX(-40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .fade-in-left.show {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .fade-in-right {
-            transform: translateX(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .fade-in-right.show {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .scale-in {
-            transform: scale(0.9);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .scale-in.show {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .bg-position-38 {
-            background-position: 38% center;
-        }
-
-        @media (min-width: 640px) {
-            .bg-position-38 {
-                background-position: center;
-            }
-        }
-
-        @keyframes infinite-scroll-partners {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        .animate-infinite-scroll-partners {
-            animation: infinite-scroll-partners 12s linear infinite;
-        }
-
-        @media (min-width: 760px) {
-            .animate-infinite-scroll-partners {
-                animation: none;
-            }
-        }
-    </style>
 </head>
 
 <body x-data="{ menuOpen: false }" x-on:keydown.escape.window="menuOpen = false"
@@ -262,7 +178,7 @@
 
 
     <div
-        class="bg-mp-hero pt-[88px] bg-no-repeat bg-position-38 md:bg-position-[unset] bg-cover h-[70vh] md:h-auto flex flex-col">
+        class="bg-mp-hero pt-[88px] bg-no-repeat bg-position-38 md:bg-position-[unset] bg-cover h-[70vh] justify-end md:h-[75vh] flex flex-col">
         <div class="max-w-[1240px] min-[1920px]:max-w-[80%] w-full mx-auto px-5 xl:px-0 flex flex-col h-full md:h-auto justify-between">
 
 

@@ -6,92 +6,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <link rel="stylesheet" href="./assets/styles/index.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="./tailwind.config.js"></script>
+    <link rel="stylesheet" href="/dist/output.css">
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <style>
-        .scroll-hidden {
-            opacity: 0;
-        }
-        
-        .fade-in-up {
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        
-        .fade-in-up.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .fade-in {
-            transition: opacity 0.8s ease-out;
-        }
-        
-        .fade-in.show {
-            opacity: 1;
-        }
-        
-        .fade-in-left {
-            transform: translateX(-40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        
-        .fade-in-left.show {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .fade-in-right {
-            transform: translateX(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        
-        .fade-in-right.show {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .scale-in {
-            transform: scale(0.9);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        
-        .scale-in.show {
-            opacity: 1;
-            transform: scale(1);
-        }
-        
-        .bg-position-38 {
-            background-position: 38% center;
-        }
-        
-        @media (min-width: 640px) {
-            .bg-position-38 {
-                background-position: center;
-            }
-        }
-        
-        @keyframes infinite-scroll-partners {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-        
-        .animate-infinite-scroll-partners {
-            animation: infinite-scroll-partners 12s linear infinite;
-        }
-        
-        @media (min-width: 760px) {
-            .animate-infinite-scroll-partners {
-                animation: none;
-            }
-        }
-    </style>
 </head>
 <body x-data="{ menuOpen: false }" 
       x-on:keydown.escape.window="menuOpen = false"
@@ -252,7 +169,7 @@
     </header>
 
 
-    <div class="bg-mp-hero pt-[88px] bg-no-repeat bg-position-38 md:bg-position-[unset] bg-cover h-[70vh] flex flex-col xl:justify-end">
+    <div class="bg-mp-hero pt-[88px] bg-no-repeat bg-position-38 md:bg-position-[unset] bg-cover h-[70vh] md:h-[75vh] flex flex-col xl:justify-end">
         <div class="max-w-[1240px] min-[1920px]:max-w-[80%] w-full mx-auto px-5 xl:px-0 flex flex-col h-full md:h-auto justify-between">
            
             <section class="flex md:pb-[60px] pb-0 justify-center flex-1 md:flex-initial md:justify-between items-center md:mt-[321px] text-center md:text-left">
@@ -299,7 +216,7 @@
             </div>
         </div>
         </div>
-        <div class="container grid grid-cols-2 md:grid-cols-4 pt-10 gap-x-5 gap-y-10 sm:gap-x-8 grid-rows-1 px-6 xl:px-0">
+        <div class="max-w-container grid grid-cols-2 mx-auto md:grid-cols-4 pt-10 gap-x-5 gap-y-10 sm:gap-x-8 grid-rows-1 px-6 xl:px-0">
             <div x-intersect.half.once="$el.classList.add('show')" class="flex sm:max-w-[unset] mx-auto flex-col w-full scale-in scroll-hidden show" style="transition-delay: 0.1s;">
                 <img class="w-8 h-8" src="./assets/icons/insured.svg" alt="Insured">
                 <div class="h-[1px] my-4 w-full max-w-[291px] bg-gradient-grey"></div>
@@ -327,7 +244,7 @@
             
         </div>
     </div>
-    <div class="container px-6 xl:px-0">
+    <div class="max-w-container mx-auto px-6 xl:px-0">
         <div class="flex flex-col gap-y-5 md:grid md:grid-cols-[380px_1fr]  mb-6 gap-x-4">
             <div class="bg-[#F9EAE5] w-full md:max-w-[380px] px-7 py-14 rounded-lg flex flex-col">
                 <div class="text-2xl mb-5 font-medium tracking-[4px] capitalize">Luxury Wedding Chauffeur</div>
@@ -600,7 +517,7 @@
                         return this.slides[this.currentSlideIndex];
                     }
                 }">
-        <div class="container mt-20 md:mt-[100px] px-6 xl:px-0">
+        <div class="max-w-container mx-auto mt-20 md:mt-[100px] px-6 xl:px-0">
             <div x-intersect.half.once="$el.classList.add('show')"
                 class="text-center mb-6 md:mb-20 mx-auto font-medium fade-in-up scroll-hidden">
                 <div class="capitalize text-[28px] md:text-4xl text-grey-600 max-w-[480px] font-medium text-center leading-[110%] mx-auto mb-6">Out <span class="text-red-800">exquisite wedding</span>  car collection</div>
