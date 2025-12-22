@@ -5,14 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <link rel="stylesheet" href="./assets/styles/index.css">
     <link rel="stylesheet" href="/dist/output.css">
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
-<body x-data="{ menuOpen: false }" x-on:keydown.escape.window="menuOpen = false"
+<body class="max-w-screen overflow-x-hidden" x-data="{ menuOpen: false }" x-on:keydown.escape.window="menuOpen = false"
     :class="{ 'overflow-hidden': menuOpen }">
 
     <div x-show="menuOpen" x-transition:enter="transition-all ease-out duration-500"
@@ -146,7 +145,7 @@
         class="fixed top-0 left-0 right-0 z-[30] transition-all duration-500">
         <div class="max-w-[1240px] lg:max-w-[80%] mx-auto px-4 py-6">
             <div class="flex items-center justify-between">
-                <a href="/" class="max-w-logo hidden md:block">
+                <a href="/" class="max-w-[168px] hidden md:block">
                     <img src="./assets/images/logo.png" alt="logo" :class="scrolled ? 'scale-95' : 'scale-100'"
                         class="transition-transform duration-500">
                 </a>
@@ -961,7 +960,7 @@
         @scroll.window="updateParallax()">
         <img src="./assets/images/parallax-image.jpg" alt="Parallax image"
             class="absolute w-full h-auto min-h-[200%] md:min-h-[150%] object-cover top-1/2 left-0 -translate-y-1/2"
-            :style="`transform: translateY(calc(-52% + ${parallaxOffset}px))`">
+            :style="`transform: translateY(calc(-2% + ${parallaxOffset}px))`">
     </section>
 
     <section class="my-[100px]">
@@ -1051,7 +1050,7 @@
      }">
     
     <div class="lg:hidden">
-        <div class="relative overflow-visible" style="width: 100vw; margin-left: calc(-50vw + 50%);">
+        <div class="relative overflow-hidden" style="width: 100vw; margin-left: calc(-50vw + 50%);">
             <div class="flex transition-transform duration-300 ease-in-out"
                  :style="`transform: translateX(-${currentSlide * 100}%)`"
                  @touchstart="handleTouchStart($event)"

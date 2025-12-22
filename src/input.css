@@ -1,3 +1,169 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+
+@theme {
+  --color-grey-50: #EBEBEB;
+  --color-grey-100: #B9B9B9;
+  --color-grey-200: #CECECE;
+  --color-grey-250: #393939;
+  --color-grey-300: #F2F2F2;
+  --color-grey-400: #C5C5C5;
+  --color-grey-500: #848484;
+  --color-grey-600: #2A2A2A;
+
+  --color-red-800: #960001;
+  --color-red-900: #760203;
+  --color-red-950: #490000;
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+}
+
+@utility bg-mp-hero {
+  background-image: url('/assets/images/hero.png');
+}
+
+@utility bg-accordion2-bg {
+  background-image: url('/assets/images/accordion/full-bg1.jpg');
+}
+
+@utility bg-accordion1-bg {
+  background-image: url('/assets/images/accordion/full-bg2.jpg');
+}
+
+@utility bg-accordion3-bg {
+  background-image: url('/assets/images/accordion/full-bg3.png');
+}
+
+@utility bg-gradient-grey {
+  background-image: linear-gradient(90deg, #2A2A2A 0%, #FFFFFF 100%);
+}
+
+@utility bg-footer-bg-gradient {
+  background-image: linear-gradient(356deg, #030303 25%, rgba(3, 3, 3, 0.00) 110%);
+}
+
+@utility bg-linear-65 {
+  background-image: linear-gradient(90deg, rgb(0 0 0 / 70%) 0%, transparent 210%);
+}
+
+@utility bg-contact-separator-gradient {
+  background-image: linear-gradient(to right, #FFFFFF 0%, #2A2A2A 50%, #FFFFFF 100%);
+}
+
+
+
+@utility container {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+@utility max-w-container {
+  max-width: 1160px;
+}
+
+@utility max-w-logo {
+  max-width: 168px;
+}
+
+@theme {
+  --font-sans: Gotham, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-gotham: Gotham, sans-serif;
+}
+
+
+@source "./*.html";
+
+@source "./index.html";
+@source "./about.html";
+@source "./fleet.html";
+@source "./weddings.html";
+@source "./car-page.html";
+@source "./contact.html";
+
+
+
+
+.scroll-hidden {
+    opacity: 0;
+}
+
+.fade-in-up {
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-up.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-in {
+    transition: opacity 0.8s ease-out;
+}
+
+.fade-in.show {
+    opacity: 1;
+}
+
+.fade-in-left {
+    transform: translateX(-40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-left.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fade-in-right {
+    transform: translateX(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-right.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scale-in {
+    transform: scale(0.9);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scale-in.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.bg-position-38 {
+    background-position: 38% center;
+}
+
+@media (min-width: 640px) {
+    .bg-position-38 {
+        background-position: center;
+    }
+}
+
+@keyframes infinite-scroll-partners {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-infinite-scroll-partners {
+    animation: infinite-scroll-partners 12s linear infinite;
+}
+
+@media (min-width: 760px) {
+    .animate-infinite-scroll-partners {
+        animation: none;
+    }
+}
