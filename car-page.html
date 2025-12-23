@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./assets/styles/index.css">
-    <link rel="stylesheet" href="/dist/output.css">
+    <link rel="stylesheet" href="./src/input.css">
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
@@ -386,7 +386,7 @@
         x-init="updateParallax(); window.addEventListener('scroll', () =&gt; updateParallax()); window.addEventListener('resize', () =&gt; updateParallax())"
         @scroll.window="updateParallax()">
         <img src="./assets/images/car-page/parallax.png" alt="Parallax image"
-            class="absolute w-full h-[130%] min-h-full md:min-h-[150%] object-cover top-1/2 left-0 -translate-y-1/2"
+            class="absolute w-full h-[160%] min-h-full md:min-h-[150%] object-cover top-1/2 left-0 -translate-y-1/2"
             :style="`transform: translateY(calc(-2% + ${parallaxOffset}px))`"
             style="transform: translateY(calc(-52% + 27.9234375px))">
         <div class="absolute w-full h-full flex items-center bg-linear-65 z-1">
