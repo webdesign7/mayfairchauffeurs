@@ -13,7 +13,7 @@
       x-on:keydown.escape.window="menuOpen = false"
       :class="{ 'overflow-hidden': menuOpen }">
     
-  <div x-show="menuOpen" x-transition:enter="transition-all ease-out duration-500"
+   <div x-show="menuOpen" x-transition:enter="transition-all ease-out duration-500"
         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
         x-transition:leave="transition-all ease-in duration-500" x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0" class="fixed inset-0 bg-black z-50 flex items-center justify-center overflow-y-auto"
@@ -50,7 +50,7 @@
 
         <nav class="md:hidden flex flex-col w-full gap-y-0 px-6 -translate-y-20 " x-show="menuOpen"
             x-transition:enter="transition-all ease-out duration-700 delay-200"
-            x-transition:enter-start="opacity-0 translate-y-8" x-transition:enter-end="opacity-100"
+            x-transition:enter-start="opacity-0 translate-y-8" x-transition:enter-end="opacity-100 "
             x-transition:leave="transition-all ease-in duration-300" x-transition:leave-start="opacity-100"
             x-transition:leave-end="opacity-0">
             
@@ -139,17 +139,17 @@
         </nav>
     </div>
 
-      <header x-data="{ scrolled: false }" x-on:scroll.window="scrolled = window.scrollY > 50"
+     <header x-data="{ scrolled: false }" x-on:scroll.window="scrolled = window.scrollY > 50"
         :class="scrolled ? 'bg-black/95 backdrop-blur-md' : ''"
         class="fixed top-0 left-0 right-0 z-[30] transition-all duration-500">
         <div class="max-w-[1240px] min-[1920px]:max-w-[80%] mx-auto px-4 py-6">
             <div class="flex items-center justify-between">
                 <a href="/" class="max-w-logo hidden md:block">
-                    <img src="./assets/images/logo.png" alt="logo" :class="scrolled ? 'scale-95' : 'scale-100'"
+                    <img src="./assets/images/logo.png" alt="logo" x-bind:class="scrolled ? 'scale-95' : 'scale-100'"
                         class="transition-transform duration-500">
                 </a>
                 <a href="/" class="max-w-logo block md:hidden">
-                    <img src="./assets/images/logo_mobile.svg" alt="logo" :class="scrolled ? 'scale-95' : 'scale-100'"
+                    <img src="./assets/images/logo_mobile.svg" alt="logo" x-bind:class="scrolled ? 'scale-95' : 'scale-100'"
                         class="transition-transform duration-500">
                 </a>
 
@@ -167,13 +167,13 @@
         </div>
     </header>
 
+    <div class=" pt-[88px] bg-black  justify-end  flex flex-col">
+        <div class="max-w-[1240px] min-[1920px]:max-w-[80%] mt-10 md:mt-0 w-full mx-auto px-5 xl:px-0 flex flex-col h-full md:h-auto justify-between">
+          
 
-    <div class="bg-mp-hero pt-[88px] bg-no-repeat bg-position-38 md:bg-position-[unset] bg-cover h-[70vh] md:h-[82vh] justify-end flex flex-col">
-        <div class="max-w-[1240px] min-[1920px]:max-w-[80%] w-full mx-auto px-5 xl:px-0 flex flex-col h-full md:h-auto justify-between">
-           
-            <section class="flex md:pb-[60px] pb-0 justify-center flex-1 md:flex-initial md:justify-between items-center md:mt-[321px] text-center md:text-left">
+            <section class="flex md:pb-[60px] pb-0 justify-center flex-1 md:flex-initial md:justify-between items-center md:mt-10 text-center md:text-left">
                 <div x-intersect.half.once="$el.classList.add('show')" class="flex flex-col gap-y-2.5 fade-in-up scroll-hidden">
-                    <div class="text-white text-[44px] sm:text-[52px] leading-[100%] uppercase font-medium">Fleet</div>
+                    <div class="text-white text-[44px] sm:text-[52px] leading-[100%] uppercase font-medium">Bookings</div>
                     <div class="text-grey-400 leading-[100%]">Embark on an unforgettable journey with:</div>
                 </div>
                 <div x-intersect.half.once="$el.classList.add('show')" class="md:block hidden items-center justify-center md:justify-end fade-in scroll-hidden" style="transition-delay: 0.2s;">
@@ -181,161 +181,17 @@
                 </div>
             </section>
 
-            <div x-intersect.half.once="$el.classList.add('show')" class="pb-[60px] md:hidden flex items-center justify-center md:justify-end fade-in scroll-hidden" style="transition-delay: 0.2s;">
+            <div x-intersect.half.once="$el.classList.add('show')" class=" md:hidden mt-10 flex items-center justify-center md:justify-end fade-in scroll-hidden" style="transition-delay: 0.2s;">
                 <img class="max-w-[84px] md:max-w-[126px]" src="./assets/images/trustpilot.png" alt="Trustpilot image">
             </div>
            
         </div>
     </div>
 
-    <div class="w-full py-2.5 bg-grey-50 xl:px-0 px-6">
-        <div class="max-w-[1240px] mx-auto flex items-center text-grey-500 text-[18px] tracking-[10%] font-medium">
-            <a class="pr-[18.5px] relative before:content-[''] before:w-[1px] before:h-4 
-            before:-translate-y-1/2 before:absolute
-            before:top-1/2 before:right-0 before:bg-grey-500" href="/">Home</a>
-            <a class="pl-[17.5px]" href="/fleet">Fleet</a>
-        </div>
-    </div>
+   
 
-    <div class="my-[74px] xl:my-[100px]" x-data="{
-        activeCategory: 'luxury',
-        cars: [
-            {
-                id: 1,
-                category: 'luxury',
-                name: 'Mercedes-Benz',
-                model: 'S-Class',
-                image: './assets/images/main-car.png',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis.',
-                capacity: 'Up to 4 passengers',
-                luggage: '3 large suitcases',
-                features: 'WiFi, Climate Control, Premium Sound'
-            },
-            {
-                id: 2,
-                category: 'luxury',
-                name: 'BMW',
-                model: 'i7',
-                image: './assets/images/bmwi7.jpg',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis.',
-                capacity: 'Up to 4 passengers',
-                luggage: '2 large suitcases',
-                features: 'WiFi, Climate Control, Premium Sound'
-            },
-            {
-                id: 3,
-                category: 'luxury',
-                name: 'Audi',
-                model: 'A8',
-                image: './assets/images/car1.png',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis.',
-                capacity: 'Up to 4 passengers',
-                luggage: '3 large suitcases',
-                features: 'WiFi, Climate Control, Premium Sound'
-            },
-            {
-                id: 4,
-                category: 'prestige',
-                name: 'Rolls-Royce',
-                model: 'Phantom',
-                image: './assets/images/rollsroyce.avif',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis.',
-                capacity: 'Up to 4 passengers',
-                luggage: '3 large suitcases',
-                features: 'WiFi, Climate Control, Premium Sound, Champagne Bar'
-            },
-            {
-                id: 5,
-                category: 'prestige',
-                name: 'Bentley',
-                model: 'Flying Spur',
-                image: './assets/images/bmwi7.jpg',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis.',
-                capacity: 'Up to 4 passengers',
-                luggage: '3 large suitcases',
-                features: 'WiFi, Climate Control, Premium Sound'
-            },
-            {
-                id: 6,
-                category: 'prestige',
-                name: 'Maybach',
-                model: 'S-Class',
-                image: './assets/images/bmwi7.jpg',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis.',
-                capacity: 'Up to 4 passengers',
-                luggage: '3 large suitcases',
-                features: 'WiFi, Climate Control, Premium Sound, Massage Seats'
-            }
-        ],
-        get filteredCars() {
-            if (this.activeCategory === 'all') {
-                return this.cars;
-            }
-            return this.cars.filter(car => car.category === this.activeCategory);
-        }
-    }">
-        <div class="container xl:px-0 px-6">
-            <div x-intersect.half.once="$el.classList.add('show')" class="text-[28px] md:text-4xl font-medium uppercase text-grey-600 mb-10 fade-in-up scroll-hidden">Our Fleet of excellence</div>
-            <div x-intersect.half.once="$el.classList.add('show')" class="text-md mb-20 md:mb-[100px] fade-in-up scroll-hidden" style="transition-delay: 0.1s;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-        
-            <div class="flex mb-10 text-[18px] font-md items-center gap-x-6 md:justify-start justify-center">
-                <button 
-                    @click="activeCategory = 'all'" 
-                    class="font-medium text-[18px] transition-colors duration-200 hover:text-red-800"
-                    :class="activeCategory === 'all' ? 'text-red-800 border-b-2 border-red-800' : 'text-grey-500'">
-                    All
-                </button>
-                <button 
-                    @click="activeCategory = 'luxury'" 
-                    class="font-medium text-[18px] transition-colors duration-200 hover:text-red-800"
-                    :class="activeCategory === 'luxury' ? 'text-red-800 border-b-2 border-red-800' : 'text-grey-500'">
-                    Luxury
-                </button>
-                <button 
-                    @click="activeCategory = 'prestige'" 
-                    class="font-medium text-[18px] transition-colors duration-200 hover:text-red-800"
-                    :class="activeCategory === 'prestige' ? 'text-red-800 border-b-2 border-red-800' : 'text-grey-500'">
-                    Prestige
-                </button>
-            </div>
 
-            <template x-for="(car, index) in filteredCars" :key="car.id">
-                <div 
-                    x-intersect.half.once="$el.classList.add('show')"
-                    class="flex flex-col mb-[100px] lg:flex-row items-center md:mb-[100px] gap-6 lg:gap-0 fade-in-up scroll-hidden"
-                    x-show="true"
-                    x-transition:enter="transition ease-out duration-300"
-                    x-transition:enter-start="opacity-0 transform scale-95"
-                    x-transition:enter-end="opacity-100 transform scale-100">
-                    <img 
-                        :src="car.image" 
-                        :alt="car.name + ' ' + car.model"
-                        class="h-[189px] sm:h-[300px] md:h-[400px] lg:h-[500px] object-cover transition-all duration-300 rounded-[12px] w-full lg:max-w-[698px] lg:w-auto"
-                        :class="index % 2 === 1 ? 'md:order-2' : ''"
-                    >
-                    <div 
-                        class="flex flex-col shrink-0 w-full lg:max-w-[542px] lg:grow-[2] lg:min-h-[368px] rounded-[12px] bg-white/70 md:px-10 md:py-5 transition-all duration-300"
-                        :class="index % 2 === 1 ? 'md:order-1 lg:translate-x-[70px]' : 'lg:-translate-x-[80px]'">
-                        <div class="text-grey-600 flex flex-col sm:flex-row text-[22px] leading-[100%] md:text-[32px] mb-5 font-medium uppercase">
-                            <span x-text="car.name"></span> <span class="text-grey-500" x-text="car.model"></span>
-                        </div>
-                        <div class="text-md md:text-md text-grey-600 leading-[170%] mb-5" x-text="car.description"></div>
-                        <ul class="p-0 md:p-[10px] text-grey-600 mb-5 text-md md:text-base">
-                            <li class="mb-3 leading-[150%] sm:leading-[100%]"><span class="font-medium">Capacity:</span> <span x-text="car.capacity"></span></li>
-                            <li class="mb-3 leading-[150%] sm:leading-[100%]"><span class="font-medium">Luggage:</span> <span x-text="car.luggage"></span></li>
-                            <li class="leading-[150%] sm:leading-[100%]"><span class="font-medium">Features:</span> <span x-text="car.features"></span></li>
-                        </ul>
-                        <div class="flex flex-row items-stretch sm:items-center gap-3">
-                            <a href="" class="bg-red-800 hover:bg-red-900 transition-colors duration-200 text-white font-medium px-10 py-3 rounded-[4px] text-center text-[18px]">Book This Car</a>
-                            <a href="" class="bg-transparent hover:bg-red-900 hover:border-red-900 hover:text-white transition-colors duration-200 text-grey-600 font-medium px-6 md:px-10 py-3 rounded-[4px] text-center text-[18px] border hover:border-transparent border-grey-300">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </template>
-          
-        </div>
-    </div>
-    
+ 
    
     <footer class="bg-[#030303] pt-[60px] pb-5 md:pb-10 w-screen overflow-x-hidden">
         <div class="max-w-[1240px] mx-auto flex flex-col text-white px-6 xl:px-0">

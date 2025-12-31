@@ -173,16 +173,16 @@
           
 
             <section class="flex md:pb-[60px] pb-0 justify-center flex-1 md:flex-initial md:justify-between items-center md:mt-[321px] text-center md:text-left">
-                <div class="flex flex-col gap-y-2.5">
+                <div x-intersect.half.once="$el.classList.add('show')" class="flex flex-col gap-y-2.5 fade-in-up scroll-hidden">
                     <div class="text-white text-[44px] sm:text-[52px] leading-[100%] uppercase font-medium">About Us</div>
                     <div class="text-grey-400 leading-[100%]">Embark on an unforgettable journey with:</div>
                 </div>
-                <div class="md:block hidden items-center justify-center md:justify-end">
+                <div x-intersect.half.once="$el.classList.add('show')" class="md:block hidden items-center justify-center md:justify-end fade-in scroll-hidden" style="transition-delay: 0.2s;">
                     <img class="max-w-[84px] md:max-w-[126px]" src="./assets/images/trustpilot.png" alt="Trustpilot image">
                 </div>
             </section>
 
-            <div class="pb-[60px] md:hidden flex items-center justify-center md:justify-end">
+            <div x-intersect.half.once="$el.classList.add('show')" class="pb-[60px] md:hidden flex items-center justify-center md:justify-end fade-in scroll-hidden" style="transition-delay: 0.2s;">
                 <img class="max-w-[84px] md:max-w-[126px]" src="./assets/images/trustpilot.png" alt="Trustpilot image">
             </div>
            
@@ -200,12 +200,12 @@
 
     <div class="container my-[100px] flex flex-col xl:px-0 px-6">
         <div class="flex items-center lg:flex-row flex-col justify-between border-b border-grey-600 pb-10">
-            <div class="flex flex-col lg:max-w-[560px]">
+            <div x-intersect.half.once="$el.classList.add('show')" class="flex flex-col lg:max-w-[560px] fade-in-left scroll-hidden">
                 <div class="text-sm text-red-800 mb-[10px] tracking-[3px]">Finnest Transport</div>
                 <div class="text-grey-600 lg:mb-0 mb-10 uppercase font-medium leading-[43px] md:text-4xl text-[28px]">WE value our clients and want them to have a nice experience</div>
             </div>
 
-            <div class="text-md leading-[170%] lg:max-w-[560px]">
+            <div x-intersect.half.once="$el.classList.add('show')" class="text-md leading-[170%] lg:max-w-[560px] fade-in-right scroll-hidden" style="transition-delay: 0.2s;">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </div>
         </div>
@@ -249,16 +249,16 @@
     <!-- Gallery section -->
      
     <div class="flex xl:px-0 md:px-6 gap-y-3 md:gap-y-0 md:max-w-[1240px] mx-auto flex-col md:flex-row md:grid md:grid-cols-3 gap-x-5 xl:flex items-center mt-[100px] justify-between">
-            <img class="md:max-w-[454px] w-full object-cover h-[278px] md:rounded-[8px]" src="http://s1076660786.websitehome.co.uk/storage/blocks/01KCJVFFSEXT0DTRM8A5R5YNTM.png" alt="sdfgsdf">
-            <img class="max-w-[454px] md:block hidden w-full object-cover h-[278px] rounded-[8px]" src="http://s1076660786.websitehome.co.uk/storage/blocks/01KCJVFFSGYQG8D44FBE9CYF6P.jpg" alt="sdfgsf">
-            <img class="xl:max-w-[284px] xl:w-[unset] w-full object-cover h-[278px] md:rounded-[8px]" src="http://s1076660786.websitehome.co.uk/storage/blocks/01KCJVFFSGYQG8D44FBE9CYF6Q.jpg" alt="sdfgdf">
+            <img x-intersect.half.once="$el.classList.add('show')" class="md:max-w-[454px] w-full object-cover h-[278px] md:rounded-[8px] fade-in-left scroll-hidden" src="http://s1076660786.websitehome.co.uk/storage/blocks/01KCJVFFSEXT0DTRM8A5R5YNTM.png" alt="sdfgsdf">
+            <img x-intersect.half.once="$el.classList.add('show')" class="max-w-[454px] md:block hidden w-full object-cover h-[278px] rounded-[8px] fade-in-left scroll-hidden" style="transition-delay: 0.2s;" src="http://s1076660786.websitehome.co.uk/storage/blocks/01KCJVFFSGYQG8D44FBE9CYF6P.jpg" alt="sdfgsf">
+            <img x-intersect.half.once="$el.classList.add('show')" class="xl:max-w-[284px] xl:w-[unset] w-full object-cover h-[278px] md:rounded-[8px] fade-in-left scroll-hidden" style="transition-delay: 0.4s;" src="http://s1076660786.websitehome.co.uk/storage/blocks/01KCJVFFSGYQG8D44FBE9CYF6Q.jpg" alt="sdfgdf">
     </div>
     <!--  -->
 
     <section class="max-w-[840px] mx-auto py-20 md:py-[100px] xl:px-0 px-6">
-        <div class="text-[28px] md:text-4xl uppercase font-medium mb-10">Enjoy Your Journey with Best Chauffeurs Services</div>
-        <div class="text-md mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-        <div class="text-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        <div x-intersect.half.once="$el.classList.add('show')" class="text-[28px] md:text-4xl uppercase font-medium mb-10 fade-in-up scroll-hidden">Enjoy Your Journey with Best Chauffeurs Services</div>
+        <div x-intersect.half.once="$el.classList.add('show')" class="text-md mb-3 fade-in-up scroll-hidden" style="transition-delay: 0.1s;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        <div x-intersect.half.once="$el.classList.add('show')" class="text-md fade-in-up scroll-hidden" style="transition-delay: 0.2s;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
     </section>
 
     <section class="relative h-[220px] md:mt-0 mt-20 md:h-[402px] overflow-hidden" x-data="{ 
@@ -525,5 +525,47 @@
             </div>
         </div>
     </footer>
+    <script>
+        (function(){
+            // Симуляция загрузки внешних картинок (не вмешиваемся в существующие стили)
+            //  - добавляет <link rel="preload"> для внешних картинок
+            //  - для незавершённых <img> диспатчит синтетическое событие `load`
+            // Это помогает при проблемах, когда стили/скрипты зависят от события load.
+            document.addEventListener('DOMContentLoaded', function(){
+                try {
+                    const externalHost = 's1076660786.websitehome.co.uk';
+                    const imgs = Array.from(document.querySelectorAll('img'))
+                        .filter(i => i.src && i.src.indexOf(externalHost) !== -1);
+
+                    imgs.forEach(img => {
+                        try {
+                            // Подсказываем браузеру заранее скачать изображение
+                            const link = document.createElement('link');
+                            link.rel = 'preload';
+                            link.as = 'image';
+                            link.href = img.src;
+                            document.head.appendChild(link);
+
+                            // Если изображение ещё не помечено как загруженное — диспатчим событие load
+                            if (!img.complete) {
+                                // Небольшая задержка, чтобы браузер успел инициировать загрузку
+                                setTimeout(() => {
+                                    try {
+                                        img.dispatchEvent(new Event('load'));
+                                    } catch (e) {
+                                        // Fail silently — ничего не ломаем в UI
+                                    }
+                                }, 60);
+                            }
+                        } catch (e) {
+                            // ignore per-image errors
+                        }
+                    });
+                } catch (e) {
+                    // fail silently
+                }
+            });
+        })();
+    </script>
 </body>
 </html>

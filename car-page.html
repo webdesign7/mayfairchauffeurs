@@ -183,18 +183,18 @@
 
             <section
                 class="flex md:pb-[60px] pb-0 justify-center flex-1 md:flex-initial md:justify-between items-center md:mt-[321px] text-center md:text-left">
-                <div class="flex flex-col gap-y-2.5">
+                <div x-intersect.half.once="$el.classList.add('show')" class="flex flex-col gap-y-2.5 fade-in-up scroll-hidden">
                     <div class="text-white text-[44px] sm:text-[52px] leading-[100%] uppercase font-medium">Mercedes
                         S-class - w222</div>
                     <div class="text-grey-400 leading-[100%]">Embark on an unforgettable journey with:</div>
                 </div>
-                <div class="md:block hidden items-center justify-center md:justify-end">
+                <div x-intersect.half.once="$el.classList.add('show')" class="md:block hidden items-center justify-center md:justify-end fade-in scroll-hidden" style="transition-delay: 0.2s;">
                     <img class="max-w-[84px] md:max-w-[126px]" src="./assets/images/trustpilot.png"
                         alt="Trustpilot image">
                 </div>
             </section>
 
-            <div class="pb-[60px] md:hidden flex items-center justify-center md:justify-end">
+            <div x-intersect.half.once="$el.classList.add('show')" class="pb-[60px] md:hidden flex items-center justify-center md:justify-end fade-in scroll-hidden" style="transition-delay: 0.2s;">
                 <img class="max-w-[84px] md:max-w-[126px]" src="./assets/images/trustpilot.png" alt="Trustpilot image">
             </div>
 
@@ -212,7 +212,7 @@
     <section class="container my-20 md:my-[100px] xl:px-0 px-6">
         <div class="flex flex-col">
             <div class="flex items-center lg:gap-x-0 md:gap-x-10 justify-between md:flex-row flex-col">
-                <div class="flex flex-col lg:mb-0 mb-10">
+                <div x-intersect.half.once="$el.classList.add('show')" class="flex flex-col lg:mb-0 mb-10 fade-in-left scroll-hidden">
                     <div class="text-sm text-red-800 mb-[10px] tracking-[3px]">Luxury</div>
                     <div class="text-[28px] md:text-4xl font-medium uppercase text-grey-600 leading-[100%]">Mercedes
                     </div>
@@ -230,7 +230,7 @@
                         magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.
                     </div>
                 </div>
-                <div class="flex flex-col md:w-[unset] w-full">
+                <div x-intersect.half.once="$el.classList.add('show')" class="flex flex-col md:w-[unset] w-full fade-in-right scroll-hidden" style="transition-delay: 0.2s;">
                     <img class="max-w-[480px] lg:mx-0 mx-auto mb-[50px] max-h-[244px] h-full w-full"
                         src="./assets/images/car-page/car-img.png" alt="Car image">
                     <div class="flex md:items-center mdgap-x-20 mb-6 md:flex-row flex-col gap-y-6 md:gap-y-0">
@@ -329,7 +329,7 @@
 
     <section class="my-20 md:my-[100px] xl:px-0 px-6">
         <div class="container grid md:grid-cols-2 lg:grid-cols-[1fr_340px] gap-x-10 ">
-            <div class="flex flex-col max-w-[780px]">
+            <div x-intersect.half.once="$el.classList.add('show')" class="flex flex-col max-w-[780px] fade-in-left scroll-hidden">
                 <div class="text-4xl text-grey-600 uppercase font-medium mb-10">Hire Mercedes S-class - W222</div>
                 <div class="text-md leading-[170%]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                     eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -345,7 +345,8 @@
                 </div>
             </div>
             <div
-                class="bg-grey-50 md:w-[unset] w-full sm:w-2/3 md:w-full mx-auto md:mt-0 mt-10 flex flex-col p-10 sm:h-fit h-auto rounded-[12px] justify-center">
+                x-intersect.half.once="$el.classList.add('show')"
+                class="bg-grey-50 md:w-[unset] w-full sm:w-2/3 md:w-full mx-auto md:mt-0 mt-10 flex flex-col p-10 sm:h-fit h-auto rounded-[12px] justify-center fade-in-right scroll-hidden" style="transition-delay: 0.2s;">
                 <div class="text-2xl font-medium uppercase mb-10">Services</div>
                 <div class="flex flex-col gap-y-3">
                     <a href="/#airport-transfer" class="flex items-center gap-x-3 text-grey-600 text-md font-medium">

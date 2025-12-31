@@ -172,16 +172,16 @@
         <div class="max-w-[1240px] min-[1920px]:max-w-[80%] w-full mx-auto px-5 xl:px-0 flex flex-col h-full md:h-auto justify-between">
            
             <section class="flex md:pb-[60px] pb-0 justify-center flex-1 md:flex-initial md:justify-between items-center md:mt-[321px] text-center md:text-left">
-                <div class="flex flex-col gap-y-2.5">
+                <div x-intersect.half.once="$el.classList.add('show')" class="flex flex-col gap-y-2.5 fade-in-up scroll-hidden">
                     <div class="text-white text-[44px] sm:text-[52px] leading-[100%] uppercase font-medium">Weddings</div>
                     <div class="text-grey-400 leading-[100%]">Embark on an unforgettable journey with:</div>
                 </div>
-                <div class="md:block hidden items-center justify-center md:justify-end">
+                <div x-intersect.half.once="$el.classList.add('show')" class="md:block hidden items-center justify-center md:justify-end fade-in scroll-hidden" style="transition-delay: 0.2s;">
                     <img class="max-w-[84px] md:max-w-[126px]" src="./assets/images/trustpilot.png" alt="Trustpilot image">
                 </div>
             </section>
 
-            <div class="pb-[60px] md:hidden flex items-center justify-center md:justify-end">
+            <div x-intersect.half.once="$el.classList.add('show')" class="pb-[60px] md:hidden flex items-center justify-center md:justify-end fade-in scroll-hidden" style="transition-delay: 0.2s;">
                 <img class="max-w-[84px] md:max-w-[126px]" src="./assets/images/trustpilot.png" alt="Trustpilot image">
             </div>
            
@@ -200,7 +200,7 @@
     <div class="my-20 md:my-[100px]">
         <div class="max-w-[1240px] min-h-[600px] mx-auto px-0 md:px-6 xl:px-0">
             <div class="flex items-center lg:flex-row flex-col justify-between border-b border-grey-600 pb-10">
-            <div class="flex flex-col lg:mb-0 mb-10 md:px-0 px-6">
+            <div x-intersect.half.once="$el.classList.add('show')" class="flex flex-col lg:mb-0 mb-10 md:px-0 px-6 fade-in-left scroll-hidden">
                 <div class="text-sm text-red-800 mb-[10px] tracking-[3px]">Finnest Transport</div>
                 <div class="text-grey-600 lg:max-w-[560px] mb-7 md:mb-10 font-medium leading-[43px] md:text-4xl capitalize text-[28px]">We value our clients and want them to have a nice experience</div>
                 <div class="text-md max-w-[700px]">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident facere ea eaque. Quo veritatis, accusamus nisi, facilis cumque illum commodi officia minus perspiciatis recusandae autem, nesciunt incidunt voluptate odit consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus eaque temporibus, laborum amet quasi similique iusto voluptatibus dolore tenetur earum officia id sapiente nostrum illum officiis! Nesciunt, corporis accusamus? Ea?</div>
@@ -210,7 +210,7 @@
                         Book
                 </a>
             </div>
-            <div class="h-[280px] md:h-[524px] lg:max-w-[324px] w-full flex grow">
+            <div x-intersect.half.once="$el.classList.add('show')" class="h-[280px] md:h-[524px] lg:max-w-[324px] w-full flex grow fade-in-right scroll-hidden" style="transition-delay: 0.2s;">
                 <img class="h-full w-full lg:w-auto object-cover" src="./assets/images/about1.png" alt="">
             </div>
         </div>
@@ -245,31 +245,31 @@
     </div>
     <div class="max-w-container mx-auto px-6 xl:px-0">
         <div class="flex flex-col gap-y-5 md:grid md:grid-cols-[380px_1fr]  mb-6 gap-x-4">
-            <div class="bg-[#F9EAE5] w-full md:max-w-[380px] px-7 py-14 rounded-lg flex flex-col">
+            <div x-intersect.half.once="$el.classList.add('show')" class="bg-[#F9EAE5] w-full md:max-w-[380px] px-7 py-14 rounded-lg flex flex-col fade-in-left scroll-hidden">
                 <div class="text-2xl mb-5 font-medium tracking-[4px] capitalize">Luxury Wedding Chauffeur</div>
                 <div class="text-[12px]">Tortor condimentum lacinia quis vel eros donec odio.
                 Feugiat fermentum in posuere urna. Faucibus turpis in eun mi bibendum.</div>
                 <div class="text-[12px]">Tortor condimentum lacinia quis vel eros donec odio.</div>
                 <div class="text-[12px]">Feugiat fermentum in posuere urna. Faucibus turpis in eun mi bibendum. Tortor condimentum lacinia quis vel eros donec odio. Feugiat fermentum in posuere urna. Faucibus turpis in eun mi bibendum.</div>
             </div>
-            <img class="w-full h-full max-h-[340px] object-cover" src="./assets/images/car1.png" alt="">
+            <img x-intersect.half.once="$el.classList.add('show')" class="w-full h-full max-h-[340px] object-cover fade-in-right scroll-hidden" style="transition-delay: 0.2s;" src="./assets/images/car1.png" alt="">
         </div>
         <div class="flex flex-col gap-y-5 md:grid md:grid-cols-[380px_1fr]  mb-6 gap-x-4">
-            <div class="bg-[#EBEBEB] w-full md:max-w-[380px] px-7 py-14 rounded-lg flex flex-col">
+            <div x-intersect.half.once="$el.classList.add('show')" class="bg-[#EBEBEB] w-full md:max-w-[380px] px-7 py-14 rounded-lg flex flex-col fade-in-left scroll-hidden">
                 <div class="text-2xl mb-5 font-medium tracking-[4px] capitalize">Complete & exceptional service</div>
                 <div class="text-[12px]">Tortor condimentum lacinia quis vel eros donec odio.
                 Feugiat fermentum in posuere urna. Faucibus turpis in eun mi bibendum.</div>
                 <div class="text-[12px]">Tortor condimentum lacinia quis vel eros donec odio.</div>
                 <div class="text-[12px]">Feugiat fermentum in posuere urna. Faucibus turpis in eun mi bibendum. Tortor condimentum lacinia quis vel eros donec odio. Feugiat fermentum in posuere urna. Faucibus turpis in eun mi bibendum.</div>
             </div>
-            <img class="w-full h-full max-h-[340px] object-cover" src="./assets/images/car1.png" alt="">
+            <img x-intersect.half.once="$el.classList.add('show')" class="w-full h-full max-h-[340px] object-cover fade-in-right scroll-hidden" style="transition-delay: 0.2s;" src="./assets/images/car1.png" alt="">
         </div>
     </div>
 
     <section class="max-w-[840px] mx-auto py-20 md:pb-20 pb-0 md:py-[100px] xl:px-0 px-6">
-        <div class="text-[28px] md:text-4xl uppercase font-medium mb-10">Enjoy Your Journey with Best Chauffeurs Services</div>
-        <div class="text-md mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-        <div class="text-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        <div x-intersect.half.once="$el.classList.add('show')" class="text-[28px] md:text-4xl uppercase font-medium mb-10 fade-in-up scroll-hidden">Enjoy Your Journey with Best Chauffeurs Services</div>
+        <div x-intersect.half.once="$el.classList.add('show')" class="text-md mb-3 fade-in-up scroll-hidden" style="transition-delay: 0.1s;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        <div x-intersect.half.once="$el.classList.add('show')" class="text-md fade-in-up scroll-hidden" style="transition-delay: 0.2s;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
     </section>
 
     <section class="relative h-[220px] md:mt-0 mt-20 md:h-[402px] overflow-hidden" x-data="{ 
